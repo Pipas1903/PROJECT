@@ -1,7 +1,6 @@
 package Player;
 
 import Common.Messages;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -58,7 +57,7 @@ public class PlayerManager {
         try {
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(Messages.PATH + convertToFileName(name)));
-            writer.write( name);
+            writer.write(name);
             writer.newLine();
             writer.flush();
             writer.close();
@@ -99,8 +98,8 @@ public class PlayerManager {
             BufferedWriter writer = new BufferedWriter(new FileWriter(Messages.PATH + convertToFileName(nickName)));
             writer.write(temp);
             if (gameName.equals(Messages.TIC_TAC_TOE))
-                writer.write( Messages.TIC_TAC_TOE + " " + score);
-            else writer.write( Messages.ROCK_PAPER_SCISSORS + " " + score);
+                writer.write(Messages.TIC_TAC_TOE + " " + score);
+            else writer.write(Messages.ROCK_PAPER_SCISSORS + " " + score);
             writer.flush();
             writer.close();
         } catch (IOException e) {
