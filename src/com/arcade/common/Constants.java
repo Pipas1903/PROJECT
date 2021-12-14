@@ -1,8 +1,8 @@
 package com.arcade.common;
 
 public class Constants {
-    public static final String PATH_TO_PLAYER_FILES = "src/com/arcade/player/PlayerFiles/";
-    public static final String PATH_TO_LEADERBOARD_FILES = "";
+    public static final String PATH_TO_PLAYER_FILES = "src/com/arcade/player/playerFiles/";
+    public static final String PATH_TO_LEADERBOARD_FILES = "src/com/arcade/leaderboard/leaderboardFiles/";
 
     // GAMES NAMES
     public static final String TIC_TAC_TOE = "Tic Tac Toe";
