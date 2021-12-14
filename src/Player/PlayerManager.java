@@ -5,7 +5,8 @@ import Common.Messages;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import static Common.Utils.scanString;
+
+import static Common.Utils.*;
 
 public class PlayerManager {
 
@@ -70,11 +71,6 @@ public class PlayerManager {
 
     private static boolean checkIfPlayerProfileExists(String name) {
         return Files.exists(Path.of(Messages.PATH + name));
-    }
-
-
-    private static String convertToFileName(String name) {
-        return (name + ".txt");
     }
 
 
