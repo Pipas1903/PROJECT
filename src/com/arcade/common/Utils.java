@@ -1,4 +1,4 @@
-package Common;
+package com.arcade.common;
 
 import java.util.Scanner;
 

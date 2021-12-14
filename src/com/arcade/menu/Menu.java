@@ -1,10 +1,10 @@
-package Arcade;
+package com.arcade.menu;
 
-import Common.Messages;
-import Player.*;
-import java.util.Scanner;
+import com.arcade.common.Messages;
+import com.arcade.player.Player;
+import com.arcade.player.PlayerManager;
 
-public class Arcade {
+public class Menu {
 
     private Player playerOne;
     private Player playerTwo;
@@ -19,10 +19,10 @@ public class Arcade {
 
     public void secondMenu() {
         /*
-         *   existing player  -> u can see player score history
-         *   create new player
+         *   existing com.arcade.arcade.player  -> u can see com.arcade.arcade.player score history
+         *   create new com.arcade.arcade.player
          *   see high scores
-         *   quit arcade
+         *   quit com.arcade.arcade
          */
         // CALL THIRD MENU
 

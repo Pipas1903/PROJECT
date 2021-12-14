@@ -1,4 +1,4 @@
-package Player;
+package com.arcade.player;
 
 public class Player {
 

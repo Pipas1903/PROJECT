@@ -1,11 +1,12 @@
-package Player;
+package com.arcade.player;
 
-import Common.Messages;
+import com.arcade.common.*;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static Common.Utils.*;
+import static com.arcade.common.Utils.*;
 
 public class PlayerManager {
 
@@ -52,11 +53,11 @@ public class PlayerManager {
 
     private static void createPlayerFile(String name) {
 
-        new File(Messages.PATH + convertToFileName(name));
-
+        new File(Constants.PATH_TO_PLAYER_FILES + convertToFileName(name));
+        // rethink exceptions !!!!!!!
         try {
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter(Messages.PATH + convertToFileName(name)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.PATH_TO_PLAYER_FILES + convertToFileName(name)));
             writer.write(name);
             writer.newLine();
             writer.flush();
@@ -69,7 +70,7 @@ public class PlayerManager {
 
 
     private static boolean checkIfPlayerProfileExists(String name) {
-        return Files.exists(Path.of(Messages.PATH + name));
+        return Files.exists(Path.of(Constants.PATH_TO_PLAYER_FILES + name));
     }
 
 
@@ -78,7 +79,7 @@ public class PlayerManager {
         String line = "";
         String result = "";
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(Messages.PATH + convertToFileName(nickName)));
+            BufferedReader reader = new BufferedReader(new FileReader(Constants.PATH_TO_PLAYER_FILES + convertToFileName(nickName)));
 
             while ((line = reader.readLine()) != null) {
                 result += line + "\n";
@@ -95,11 +96,11 @@ public class PlayerManager {
     public static void addScoreToPlayerFile(String nickName, int score, String gameName) {
         String temp = readFromPlayerFile(nickName);
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(Messages.PATH + convertToFileName(nickName)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.PATH_TO_PLAYER_FILES + convertToFileName(nickName)));
             writer.write(temp);
-            if (gameName.equals(Messages.TIC_TAC_TOE))
-                writer.write(Messages.TIC_TAC_TOE + " " + score);
-            else writer.write(Messages.ROCK_PAPER_SCISSORS + " " + score);
+            if (gameName.equals(Constants.TIC_TAC_TOE))
+                writer.write(Constants.TIC_TAC_TOE + " " + score);
+            else writer.write(Constants.ROCK_PAPER_SCISSORS + " " + score);
             writer.flush();
             writer.close();
         } catch (IOException e) {
