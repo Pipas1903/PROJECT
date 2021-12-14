@@ -2,9 +2,9 @@ package com.arcade.common;
 
 public class Messages {
 
-    public static final String WELCOME_TO_PLAYER_CREATION = "Welcome to com.arcade.arcade.player creation!";
+    public static final String WELCOME_TO_PLAYER_CREATION = "Welcome to player creation!";
     public static final String CHOOSE_NICKNAME = "Insert a 3 character nickname: ";
-    public static final String WELCOME_TO_PLAYER_SELECTION = "Welcome to com.arcade.arcade.player selection!";
+    public static final String WELCOME_TO_PLAYER_SELECTION = "Welcome to player selection!";
 
     // INVALID INPUT MESSAGES
     public static final String INVALID_INPUT = "INVALID INPUT ";
