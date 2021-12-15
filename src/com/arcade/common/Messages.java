@@ -34,6 +34,10 @@ public class Messages {
     public static final String TIE = "tie";
     public static final String TIE_ANNOUNCE = "It's a tie!";
     public static final String ANNOUNCE_WINNER = "The winner is: ";
+    public static final String PC = "PC";
 
     public static final String BULLET_POINT = " * ";
+
+    // MENU
+    public static final String SECOND_MENU = "What do you wish to do?";
 }

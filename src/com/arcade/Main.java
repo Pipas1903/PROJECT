@@ -156,10 +156,9 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        // TicTacToe game = new TicTacToe(PlayerManager.playerSelection(), PlayerManager.playerSelection());
-        // game.startGame2Players();
-        TicTacToe game = new TicTacToe(PlayerManager.playerSelection());
-        game.startGame1Players();
+        TicTacToe game = new TicTacToe(PlayerManager.playerSelection(), PlayerManager.playerSelection());
+        game.startGame2Players();
+
 
     }
     //new Menu().secondMenu();

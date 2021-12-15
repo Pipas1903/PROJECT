@@ -1,6 +1,7 @@
 package com.arcade.menu;
 
 import com.arcade.common.Messages;
+import com.arcade.common.Utils;
 import com.arcade.player.Player;
 import com.arcade.player.PlayerManager;
 
@@ -11,13 +12,12 @@ public class Menu {
 
     public void on() {
         System.out.println(Messages.WELCOME_TO_ARCADE + "\n" + Messages.PRESS_ENTER);
-        /*“WELCOME TO THE ARCADE”
-       “Press enter to start”
-        */
-        // CALL SECOND MENU
+        Utils.scanString.nextLine();
+        secondMenu();
     }
 
     public void secondMenu() {
+
         /*
          *   existing com.arcade.arcade.player  -> u can see com.arcade.arcade.player score history
          *   create new com.arcade.arcade.player
@@ -26,14 +26,16 @@ public class Menu {
          */
         // CALL THIRD MENU
 
+
+
         // PLAYER CREATION
         System.out.println(Messages.WELCOME_TO_PLAYER_CREATION);
         this.playerOne = PlayerManager.playerCreation();
         System.out.println(Messages.SUCCESS);
 
         // PLAYER SELECTION
-      //  System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
-       // this.playerOne = PlayerManager.playerSelection();
+        //  System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
+        // this.playerOne = PlayerManager.playerSelection();
     }
 
     public void thirdMenu() {

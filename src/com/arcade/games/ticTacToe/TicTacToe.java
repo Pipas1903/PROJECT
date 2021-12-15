@@ -1,9 +1,11 @@
 package com.arcade.games.ticTacToe;
 
 import com.arcade.common.*;
+import com.arcade.leaderboard.LeaderboardManager;
 import com.arcade.player.Player;
 import com.arcade.player.PlayerManager;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class TicTacToe {
@@ -49,7 +51,7 @@ public class TicTacToe {
     }
 
 
-    public void startGame2Players() {
+    public void startGame2Players() throws IOException {
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol2Player();
         for (int i = 0; i < rounds; i++) {
@@ -58,6 +60,8 @@ public class TicTacToe {
         }
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         PlayerManager.addScoreToPlayerFile(playerTwo.getNickname(), playerTwo.getCurrentScore(), game);
+        LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
+        LeaderboardManager.manageScores(game, playerTwo.getNickname(), playerTwo.getCurrentScore());
         System.out.println(Messages.GREAT_GAME);
     }
 
@@ -244,6 +248,7 @@ public class TicTacToe {
 
 
     private LinkedList<String> aiFindPossibleMoves() {
+
         LinkedList<String> freeTiles = new LinkedList<>();
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -254,20 +259,14 @@ public class TicTacToe {
     }
 
     private static String pcChooseTile(LinkedList<String> allFreeTiles) {
+        if (allFreeTiles.size()==0) return null;
+
         int randomNumber = (int) Math.floor(Math.random() * (allFreeTiles.size()));
         return allFreeTiles.get(randomNumber);
     }
 
     private void pcPlacePieceInBoard(String coordinates) {
-        if (!winner.isEmpty()) {
-            return;
-        }
-
-        if (freeTiles() == 0) {
-            winner = Messages.TIE;
-            return;
-        }
-
+        if(coordinates==null)return;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++)
                 if (board[i][j].equals(coordinates)) {
@@ -286,19 +285,22 @@ public class TicTacToe {
             hasPCWon();
 
         } while (winner.isEmpty());
-        assignPoints(playerOne);
+        end();
         board = new String[3][3];
         winner = "";
     }
 
-    public void startGame1Players() {
+    public void startGame1Players() throws IOException {
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol1Player();
         for (int i = 0; i < rounds; i++) {
+
             System.out.println(Messages.ROUND + (i + 1));
             startRound1Player();
+            clearScreen();
         }
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
+        LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
         System.out.println(Messages.GREAT_GAME);
     }
 
@@ -306,20 +308,32 @@ public class TicTacToe {
 
         for (int i = 0; i < board.length; i++) {
             if (board[0][i] == aiSymbol && board[1][i] == aiSymbol && board[2][i] == aiSymbol) {
-                winner = "pc";
+                winner = Messages.PC;
             } else if (board[i][0] == aiSymbol && board[i][1] == aiSymbol && board[i][2] == aiSymbol) {
-                winner = "pc";
+                winner = Messages.PC;
             }
         }
         if (board[0][0] == aiSymbol && board[1][1] == aiSymbol && board[2][2] == aiSymbol || (board[0][2] == aiSymbol && board[2][0] == aiSymbol && board[1][1] == aiSymbol)) {
-            winner = "pc";
+            winner = Messages.PC;
         }
-        lastWinner = "pc";
+        lastWinner = Messages.PC;
     }
 
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    private void end() {
+        draw();
+        if (winner.equals(Messages.TIE)) {
+            System.out.println(Messages.TIE_ANNOUNCE);
+        } else if (winner.equals(playerOne.getNickname())) {
+            System.out.println(Messages.ANNOUNCE_WINNER + playerOne.getNickname());
+            assignPoints(playerOne);
+        } else {
+            System.out.println(Messages.ANNOUNCE_WINNER + Messages.PC);
+        }
     }
 
 }

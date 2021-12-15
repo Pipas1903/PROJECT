@@ -1,3 +1,1 @@
 pop
-Tic Tac Toe 21
-Tic Tac Toe 42
