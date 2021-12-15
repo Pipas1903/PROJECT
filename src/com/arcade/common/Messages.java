@@ -16,13 +16,26 @@ public class Messages {
 
 
     public static final String WELCOME_TO_ARCADE = " WELCOME TO THE ARCADE ";
-    public static final String PRESS_ENTER = "  *press enter to start*  ";
+    public static final String PRESS_ENTER = "  *press enter to continue*  ";
 
 
     public static final String NICKNAME = "Nickname: ";
-    public static final String SCORE_HISTORY = "Score History: ";
-    public static final String BULLET_POINT = " * ";
 
-    // LEADERBOARD N
+    // ALL GAMES
+    public static final String ARE_YOU_READY = "Are you ready?\n Let's play: ";
+    public static final String GREAT_GAME = "Great game! Until next time!";
+    public static final String ROUND = "ROUND ";
+
+    // TIC TAC TOE MESSAGES
+    public static final String CHOOSE_SYMBOL = "which symbol would you like to use? ";
+    public static final char X = 'X';
+    public static final char O = 'O';
+    public static final String CHOOSE_COORDINATES = "please enter the coordinates where you want to place your piece: ";
+    public static final String OCCUPIED_TILE = "That tile is already occupied! Try another one!";
+    public static final String ILLEGAL_MOVE = "That move is ilegal!";
+    public static final String BULLET_POINT = " * ";
+    public static final String TIE = "tie";
+    public static final String TIE_ANNOUNCE = "It's a tie!";
+    public static final String ANNOUNCE_WINNER = "The winner is: ";
 
 }

@@ -1,7 +1,7 @@
 package com.arcade.player;
 
 import com.arcade.common.*;
-
+import com.arcade.common.GamesInfo;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -93,14 +93,23 @@ public class PlayerManager {
     }
 
 
-    public static void addScoreToPlayerFile(String nickName, int score, String gameName) {
+    public static void addScoreToPlayerFile(String nickName, int score, GamesInfo game) {
         String temp = readFromPlayerFile(nickName);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.PATH_TO_PLAYER_FILES + convertToFileName(nickName)));
             writer.write(temp);
-            if (gameName.equals(Constants.TIC_TAC_TOE))
-                writer.write(Constants.TIC_TAC_TOE + " " + score);
-            else writer.write(Constants.ROCK_PAPER_SCISSORS + " " + score);
+            switch (game) {
+                case TIC_TAC_TOE:
+                    writer.write(Constants.TIC_TAC_TOE + " " + score);
+                    break;
+                case ROCK_PAPER_SCISSORS:
+                    writer.write(Constants.ROCK_PAPER_SCISSORS + " " + score);
+                    break;
+                case FOUR_IN_LINE:
+                    writer.write(Constants.FOUR_IN_LINE + " " + score);
+                    break;
+            }
+
             writer.flush();
             writer.close();
         } catch (IOException e) {

@@ -1,14 +1,13 @@
 package com.arcade.leaderboard;
 
 import com.arcade.common.Messages;
+import com.arcade.common.GamesInfo;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.util.AbstractMap;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class LeaderboardManager {
@@ -16,7 +15,7 @@ public class LeaderboardManager {
     private static final int limit = 5;
 
     // PASTED FROM PLAYER -> NEEDS CHANGES
-    private static String readFile(LeaderboardPaths leaderboardFile) {
+    private static String readFile(GamesInfo leaderboardFile) {
 
         String line = "";
         String result = "";
@@ -36,7 +35,7 @@ public class LeaderboardManager {
     }
 
 
-    public static void insertScore(String nickName, int score, LeaderboardPaths game) {
+    public static void insertScore(String nickName, int score, GamesInfo game) {
 
         String temp = readFile(game);
         BufferedWriter writer = null;
@@ -54,7 +53,7 @@ public class LeaderboardManager {
         }
     }
 
-    public static void manageScores(LeaderboardPaths game, String nickname, int score) throws IOException {
+    public static void manageScores(GamesInfo game, String nickname, int score) throws IOException {
         if (isLeaderboardFull(game)) {
             insertScore(nickname, score, game);
             writeOrdered(game, orderScores(game));
@@ -65,12 +64,23 @@ public class LeaderboardManager {
         writeOrdered(game, orderScores(game));
     }
 
-    public static boolean isLeaderboardFull(LeaderboardPaths game) throws IOException {
+    public static boolean isLeaderboardFull(GamesInfo game) throws IOException {
         return Files.lines(Path.of(game.path)).count() >= limit;
     }
 
-    public static String orderScores(LeaderboardPaths game) {
+    public static String orderScores(GamesInfo game) {
         String[] current = readFile(game).split("\n");
+
+        return Arrays.stream(current)
+                .map(s -> {
+                    String[] split = s.split(" ");
+                    return new AbstractMap.SimpleEntry<>(Integer.valueOf(split[0]), split[1]);
+                })
+                .sorted((o1, o2) -> o2.getKey().compareTo(o1.getKey()))
+                .map(e -> e.getKey() + " " + e.getValue())
+                .collect(Collectors.joining("\n"));
+
+        /* FIRST IMPLEMENTATION
         String[][] separated = new String[current.length][2];
 
         for (int i = 0; i < separated.length; i++) separated[i] = current[i].split(" ");
@@ -91,11 +101,11 @@ public class LeaderboardManager {
         String[] scoreArray = new String[separated.length];
         for (int i = 0; i < separated.length; i++) scoreArray[i] = String.join(" ", separated[i]);
 
-        return String.join("\n", scoreArray);
+        return String.join("\n", scoreArray);*/
     }
 
 
-    public static void writeOrdered(LeaderboardPaths game, String orderedScores) {
+    public static void writeOrdered(GamesInfo game, String orderedScores) {
         BufferedWriter writer = null;
 
         try {
