@@ -14,7 +14,6 @@ public class LeaderboardManager {
 
     private static final int limit = 5;
 
-    // PASTED FROM PLAYER -> NEEDS CHANGES
     private static String readFile(GamesInfo leaderboardFile) {
 
         String line = "";
