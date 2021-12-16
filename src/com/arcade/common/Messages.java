@@ -5,6 +5,8 @@ public class Messages {
     public static final String WELCOME_TO_PLAYER_CREATION = "Welcome to player creation!";
     public static final String CHOOSE_NICKNAME = "Insert a 3 character nickname: ";
     public static final String WELCOME_TO_PLAYER_SELECTION = "Welcome to player selection!";
+    public static final String WELCOME_TO_GAME_SELECTION = "Which game do you wish to play?";
+    public static final String BYE = "Bye! Until next time!";
 
     // INVALID INPUT MESSAGES
     public static final String INVALID_INPUT = "INVALID INPUT ";
@@ -17,7 +19,6 @@ public class Messages {
 
     public static final String WELCOME_TO_ARCADE = " WELCOME TO THE ARCADE ";
     public static final String PRESS_ENTER = "  *press enter to continue*  ";
-
 
     public static final String NICKNAME = "Nickname: ";
 
@@ -38,6 +39,27 @@ public class Messages {
 
     public static final String BULLET_POINT = " * ";
 
+    // GAME RULES
+    public static final String RULES = "RULES: ";
+    public static final String POINT_ATTRIBUTION = "POINT ATTRIBUTION: ";
+    public static final String TIC_TAC_TOE_RULES = "Each player takes a turn to put his mark. The first one to make a row, wins.";
+    public static final String ROCK_PAPER_SCISSORS_RULES = "";
+    public static final String FOUR_IN_LINE_RULES = "";
+    public static final String POINT_ATTRIBUTION_RULES = "Each round won counts as 21 points. If you win several rounds in a row, your points will scale exponentially.";
+
     // MENU
-    public static final String SECOND_MENU = "What do you wish to do?";
+    public static final String TO_DO = "What do you wish to do?";
+    public static final String INSERT_NUMBER = "insert correspondent number";
+    public static final String EXIT_OPTION = "0. quit";
+
+
+    public static final String OPTION_1_2MENU = "1. create a player";
+    public static final String OPTION_2_2MENU = "2. select a player";
+
+
+    public static final String OPTION_1_3MENU = "1. Play " + Constants.TIC_TAC_TOE;
+    public static final String OPTION_2_3MENU = "2. Play " + Constants.ROCK_PAPER_SCISSORS;
+    public static final String OPTION_3_3MENU = "3. Play " + Constants.FOUR_IN_LINE;
+
+
 }
