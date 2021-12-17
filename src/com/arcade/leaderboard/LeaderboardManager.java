@@ -1,5 +1,6 @@
 package com.arcade.leaderboard;
 
+import com.arcade.common.Constants;
 import com.arcade.common.Messages;
 import com.arcade.common.GamesInfo;
 
@@ -8,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.AbstractMap;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class LeaderboardManager {
@@ -67,7 +69,7 @@ public class LeaderboardManager {
         return Files.lines(Path.of(game.path)).count() >= limit;
     }
 
-    public static String orderScores(GamesInfo game) {
+    private static String orderScores(GamesInfo game) {
         String[] current = readFile(game).split("\n");
 
         return Arrays.stream(current)
@@ -117,6 +119,19 @@ public class LeaderboardManager {
         } catch (IOException e) {
             System.out.println(Messages.UNEXPECTED_ERROR);
         }
+    }
+
+    public static void printScores(GamesInfo game) {
+        String[] leaderboard = readFile(game).split("\n");
+        AtomicInteger counter = new AtomicInteger(1);
+        String results = Arrays.stream(leaderboard)
+                .map(s -> {
+                    String[] split = s.split(" ");
+                    return new AbstractMap.SimpleEntry<>(Integer.valueOf(split[0]), split[1]);
+                })
+                .map(e -> Constants.ANSI_YELLOW + "top " + counter.getAndIncrement() + ": " + Constants.ANSI_GREEN + e.getKey() + Constants.ANSI_RESET + " points -> " + Constants.ANSI_CYAN + e.getValue() + Constants.ANSI_RESET)
+                .collect(Collectors.joining("\n"));
+        System.out.println(results);
     }
 }
 

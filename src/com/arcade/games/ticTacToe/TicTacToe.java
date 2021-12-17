@@ -55,6 +55,7 @@ public class TicTacToe {
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol2Player();
         for (int i = 0; i < rounds; i++) {
+
             System.out.println(Messages.ROUND + (i + 1));
             startRound2Players();
         }
@@ -184,9 +185,12 @@ public class TicTacToe {
                 if (j != board.length - 1) {
                     System.out.print(" | ");
                 }
+
             }
             System.out.println();
-            System.out.println("--+---+--");
+            if (i < 2) {
+                System.out.println("--+---+--");
+            }
         }
         System.out.println();
     }
@@ -259,14 +263,14 @@ public class TicTacToe {
     }
 
     private static String pcChooseTile(LinkedList<String> allFreeTiles) {
-        if (allFreeTiles.size()==0) return null;
+        if (allFreeTiles.size() == 0) return null;
 
         int randomNumber = (int) Math.floor(Math.random() * (allFreeTiles.size()));
         return allFreeTiles.get(randomNumber);
     }
 
     private void pcPlacePieceInBoard(String coordinates) {
-        if(coordinates==null)return;
+        if (coordinates == null) return;
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++)
                 if (board[i][j].equals(coordinates)) {
@@ -283,7 +287,6 @@ public class TicTacToe {
             hasPlayerWon(playerOne);
             pcPlacePieceInBoard(pcChooseTile(aiFindPossibleMoves()));
             hasPCWon();
-
         } while (winner.isEmpty());
         end();
         board = new String[3][3];
@@ -294,10 +297,9 @@ public class TicTacToe {
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol1Player();
         for (int i = 0; i < rounds; i++) {
-
             System.out.println(Messages.ROUND + (i + 1));
             startRound1Player();
-            clearScreen();
+
         }
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());

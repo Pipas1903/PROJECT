@@ -1,128 +1,314 @@
 package com.arcade.menu;
 
+import com.arcade.common.Constants;
 import com.arcade.common.GamesInfo;
 import com.arcade.common.Messages;
 import com.arcade.common.Utils;
+import com.arcade.games.fourInLine.FourInLine;
+import com.arcade.games.rockPaperScissors.RockPaperScissors;
+import com.arcade.games.ticTacToe.TicTacToe;
+import com.arcade.leaderboard.LeaderboardManager;
 import com.arcade.player.Player;
 import com.arcade.player.PlayerManager;
+
+import java.io.IOException;
 
 public class Menu {
 
     private Player playerOne;
     private Player playerTwo;
+    private int numberOfPlayers;
 
-    public void on() {
-        System.out.println(Messages.WELCOME_TO_ARCADE + "\n" + Messages.PRESS_ENTER);
+
+    public void on() throws IOException {
+        System.out.println(Messages.ARCADE);
+        System.out.println(Messages.PRESS_ENTER);
         Utils.scanString.nextLine();
-        secondMenu();
+        chooseNumberOfPlayers();
     }
 
-    public void secondMenu() {
+    public void chooseNumberOfPlayers() throws IOException {
+
         while (true) {
-            System.out.println(Messages.TO_DO);
-            System.out.println(Messages.INSERT_NUMBER);
-            System.out.println(Messages.OPTION_1_2MENU);
-            System.out.println(Messages.OPTION_2_2MENU);
+
+            System.out.println(Messages.HOW_MANY_PLAYERS);
+            System.out.println(Messages.ONE_PLAYER);
+            System.out.println(Messages.TWO_PLAYERS);
             System.out.println(Messages.EXIT_OPTION);
+
             String choice = getChoice();
+
             switch (choice) {
+
                 case "1":
-                    System.out.println(Messages.WELCOME_TO_PLAYER_CREATION);
-                    this.playerOne = PlayerManager.playerCreation();
-                    System.out.println(Messages.SUCCESS);
-                    thirdMenu();
+                    numberOfPlayers = 1;
+                    System.out.println();
+                    System.out.println(Constants.ANSI_PURPLE + "Player one " + Constants.ANSI_RESET);
+                    this.playerOne = createSelectPlayer();
+                    System.out.println();
+                    if (playerOne == null) {
+                        return;
+                    }
+                    chooseGame();
                     break;
+
                 case "2":
-                    System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
-                    this.playerOne = PlayerManager.playerSelection();
-                    System.out.println(Messages.SUCCESS);
-                    thirdMenu();
+                    System.out.println();
+                    numberOfPlayers = 2;
+                    System.out.println(Constants.ANSI_PURPLE + "Player one " + Constants.ANSI_RESET);
+                    this.playerOne = createSelectPlayer();
+                    System.out.println();
+                    if (playerOne == null) {
+                        return;
+                    }
+                    System.out.println(Constants.ANSI_BLUE + "Player two " + Constants.ANSI_RESET);
+                    this.playerTwo = createSelectPlayer();
+                    System.out.println();
+                    if (playerTwo == null) {
+                        return;
+                    }
+                    chooseGame();
                     break;
+
                 case "0":
+                    System.out.println();
                     System.out.println(Messages.BYE);
-                    return;
+                    System.exit(1);
+
                 default:
+                    System.out.println();
                     System.out.println(Messages.INVALID_INPUT);
                     break;
             }
         }
     }
 
-    public void thirdMenu() {
+    public Player createSelectPlayer() throws IOException {
 
-        System.out.println(Messages.TO_DO);
-        System.out.println(Messages.OPTION_1_3MENU);
-        System.out.println(Messages.OPTION_2_3MENU);
-        System.out.println(Messages.OPTION_3_3MENU);
+        while (true) {
 
-        String choice = getChoice();
+            System.out.println(Messages.TO_DO);
+            System.out.println(Messages.INSERT_NUMBER);
+            System.out.println(Messages.CREATE_PLAYER);
+            System.out.println(Messages.SELECT_PLAYER);
+            System.out.println(Messages.EXIT_OPTION);
 
-        switch (choice) {
-            case "1":
-                fourthMenu(GamesInfo.TIC_TAC_TOE);
+            String choice = getChoice();
+
+            switch (choice) {
+
+                case "1":
+                    System.out.println();
+                    System.out.println(Messages.WELCOME_TO_PLAYER_CREATION);
+                    Player playerOpt1 = PlayerManager.playerCreation();
+                    System.out.println(Messages.SUCCESS);
+                    return playerOpt1;
+
+                case "2":
+                    System.out.println();
+                    System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
+                    Player playerOpt2 = PlayerManager.playerSelection();
+                    System.out.println(Messages.SUCCESS);
+                    return playerOpt2;
+
+                case "3":
+                    System.out.println();
+                    System.out.println("3. " + Messages.BACK_OPTION);
+                    chooseNumberOfPlayers();
+                    break;
+
+                case "0":
+                    System.out.println();
+                    System.out.println(Messages.BYE);
+                    System.exit(1);
+
+                default:
+                    System.out.println();
+                    System.out.println(Messages.INVALID_INPUT);
+                    break;
+            }
+        }
+    }
+
+    public void chooseGame() throws IOException {
+
+        while (true) {
+
+            System.out.println(Messages.WELCOME_TO_GAME_SELECTION);
+            System.out.println(Messages.INSERT_NUMBER);
+            System.out.println(Messages.PLAY_TIC_TAC_TOE);
+            System.out.println(Messages.PLAY_ROCK_PAPER_SCISSORS);
+            System.out.println(Messages.PLAY_FOUR_IN_LINE);
+            System.out.println("4. " + Messages.BACK_OPTION);
+            System.out.println(Messages.EXIT_OPTION);
+
+            String choice = getChoice();
+
+            switch (choice) {
+
+                case "1":
+                    System.out.println();
+                    gameOptions(GamesInfo.TIC_TAC_TOE);
+                    break;
+
+                case "2":
+                    System.out.println();
+                    gameOptions(GamesInfo.ROCK_PAPER_SCISSORS);
+                    break;
+
+                case "3":
+                    System.out.println();
+                    gameOptions(GamesInfo.FOUR_IN_LINE);
+                    break;
+
+                case "4":
+                    System.out.println();
+                    createSelectPlayer();
+                    break;
+
+                case "0":
+                    System.out.println();
+                    System.out.println(Messages.BYE);
+                    System.exit(1);
+
+                default:
+                    System.out.println();
+                    System.out.println(Messages.INVALID_INPUT);
+                    System.out.println(Messages.TRY_AGAIN);
+                    break;
+            }
+        }
+    }
+
+    public void gameOptions(GamesInfo game) throws IOException {
+
+        while (true) {
+            System.out.println(Messages.TO_DO);
+            System.out.println(Messages.INSERT_NUMBER);
+            System.out.println(Messages.SEE_GAME_RULES);
+            System.out.println(Messages.SEE_POINT_RULES);
+            System.out.println(Messages.PLAY);
+            System.out.println("4. " + Messages.SEE_PLAYER_LEADERBOARD);
+            System.out.println("5. " + Messages.SEE_GAME_LEADERBOARD);
+            System.out.println("6. " + Messages.BACK_OPTION);
+            System.out.println(Messages.EXIT_OPTION);
+
+            String choice = getChoice();
+
+            switch (choice) {
+                case "1":
+                    System.out.println();
+                    System.out.println(Messages.RULES);
+                    gameRules(game);
+                    Utils.scanString.nextLine();
+                    gameOptions(game);
+                    break;
+
+                case "2":
+                    System.out.println();
+                    System.out.println(Messages.POINT_ATTRIBUTION);
+                    System.out.println(Messages.POINT_ATTRIBUTION_RULES);
+                    Utils.scanString.nextLine();
+                    gameOptions(game);
+                    break;
+
+                case "3":
+                    System.out.println();
+                    play(game);
+                    break;
+
+                case "4":
+                    System.out.println();
+                    if (playerTwo != null) {
+                        System.out.println(playerOne.getNickname());
+                        seePlayerScoreHistory(playerOne);
+                        System.out.println();
+                        System.out.println(playerTwo.getNickname());
+                        seePlayerScoreHistory(playerTwo);
+                        Utils.scanString.nextLine();
+                        break;
+                    }
+                    System.out.println(playerOne.getNickname());
+                    seePlayerScoreHistory(playerOne);
+                    Utils.scanString.nextLine();
+                    break;
+
+                case "5":
+                    System.out.println();
+                    System.out.println(Constants.ANSI_PURPLE + Messages.TOP_SCORES + Constants.ANSI_RESET);
+                    LeaderboardManager.printScores(game);
+                    Utils.scanString.nextLine();
+                    break;
+                case "6":
+                    System.out.println();
+                    chooseGame();
+                    break;
+                case "0":
+                    System.out.println();
+                    System.out.println(Messages.BYE);
+                    System.exit(1);
+                    return;
+                default:
+                    System.out.println();
+                    System.out.println(Messages.INVALID_INPUT);
+                    System.out.println(Messages.TRY_AGAIN);
+                    break;
+            }
+        }
+
+    }
+
+    public void play(GamesInfo game) throws IOException {
+        if (numberOfPlayers == 1) {
+            switch (game) {
+                case TIC_TAC_TOE:
+                    System.out.println();
+                    new TicTacToe(playerOne).startGame1Players();
+                    break;
+                case ROCK_PAPER_SCISSORS:
+                    System.out.println();
+                    new RockPaperScissors(playerOne).startGame1Players();
+                    break;
+                case FOUR_IN_LINE:
+                    System.out.println();
+                    new FourInLine(playerOne).startGame1Players();
+                    break;
+            }
+            return;
+        }
+
+        switch (game) {
+            case TIC_TAC_TOE:
+                System.out.println();
+                new TicTacToe(playerOne, playerTwo).startGame2Players();
                 break;
-            case "2":
-                System.out.println("empty case 2");
+            case ROCK_PAPER_SCISSORS:
+                System.out.println();
+                new RockPaperScissors(playerOne, playerTwo).startGame2Players();
                 break;
-            default:
-                System.out.println("empty case 3");
+            case FOUR_IN_LINE:
+                System.out.println();
+                new FourInLine(playerOne, playerTwo).startGame2Players();
                 break;
         }
-        /*
-        * choose game
-        game rules and point attribution
-        *play*
-        */
-
-        // CALL FOURTH MENU
     }
 
-    public void fourthMenu(GamesInfo game) {
-        System.out.println(Messages.TO_DO);
-
-        String choice = getChoice();
-
-        switch (choice) {
-            case "1":
-                System.out.println(Messages.RULES);
-                System.out.println(game.rules);
-                System.out.println(Messages.POINT_ATTRIBUTION);
-                System.out.println(Messages.POINT_ATTRIBUTION_RULES);
-                fourthMenu(game);
+    public void gameRules(GamesInfo game) {
+        switch (game) {
+            case TIC_TAC_TOE:
+                System.out.println(Messages.TIC_TAC_TOE_RULES);
                 break;
-            case "2":
-                System.out.println("empty case 2");
+            case ROCK_PAPER_SCISSORS:
+                System.out.println(Messages.ROCK_PAPER_SCISSORS_RULES);
                 break;
-            case "3":
-                System.out.println("empty case 3");
+            case FOUR_IN_LINE:
+                System.out.println(Messages.FOUR_IN_LINE_RULES);
                 break;
         }
-
-
-        // tic tac toe
-        // see game rules
-        // single player or multiplayer
-        // leaderboard
-
     }
 
-    public void fifthMenu() {
-        // tic tac toe
-        // rock paper scissors
-        // 4 in line
-
-        // see game rules
-        // single player or multiplayer
-        // leaderboard
-
-    }
-
-    public void sixthMenu() {
-
-    }
-
-    public void seventhMenu() {
-
+    public void seePlayerScoreHistory(Player player) {
+        PlayerManager.printPlayerScoreHistory(player.getNickname());
     }
 
     public void eighthMenu() {
@@ -134,6 +320,7 @@ public class Menu {
     public void ninthMenu() {
 
     }
+
 
     private String getChoice() {
 

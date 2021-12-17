@@ -2,9 +2,14 @@ package com.arcade.player;
 
 import com.arcade.common.*;
 import com.arcade.common.GamesInfo;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.AbstractMap;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static com.arcade.common.Utils.*;
 
@@ -74,7 +79,7 @@ public class PlayerManager {
     }
 
 
-    public static String readFromPlayerFile(String nickName) {
+    private static String readFromPlayerFile(String nickName) {
 
         String line = "";
         String result = "";
@@ -94,7 +99,9 @@ public class PlayerManager {
 
 
     public static void addScoreToPlayerFile(String nickName, int score, GamesInfo game) {
+
         String temp = readFromPlayerFile(nickName);
+
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(Constants.PATH_TO_PLAYER_FILES + convertToFileName(nickName)));
             writer.write(temp);
@@ -115,5 +122,19 @@ public class PlayerManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void printPlayerScoreHistory(String nickName) {
+        String temp = readFromPlayerFile(nickName);
+
+        String results = temp.lines().filter(s -> !s.equals(nickName))
+                .map(s -> {
+                    String[] split = s.split(" ");
+                    return new AbstractMap.SimpleEntry<>(String.join(" ",split[0],split[1],split[2]), split[3]);
+                })
+                .map(e -> Constants.ANSI_YELLOW + "game: " + Constants.ANSI_GREEN + e.getKey() + Constants.ANSI_RESET + " points -> " + Constants.ANSI_CYAN + e.getValue() + Constants.ANSI_RESET)
+                .collect(Collectors.joining("\n"));
+
+        System.out.println(results);
     }
 }

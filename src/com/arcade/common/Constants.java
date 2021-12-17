@@ -6,7 +6,7 @@ public class Constants {
     public static final String PATH_TO_PLAYER_FILES = "src/com/arcade/player/playerFiles/";
     public static final String PATH_TO_LEADERBOARD_FILES = "src/com/arcade/leaderboard/leaderboardFiles/";
 
-    public static final String LINE = "\n";
+    public static final String LINE = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 
     // GAMES NAMES
     public static final String TIC_TAC_TOE = "Tic Tac Toe";
