@@ -1,3 +1,5 @@
 63 pip
+63 sop
+42 pip
 21 cok
-0 cok
+21 pip
