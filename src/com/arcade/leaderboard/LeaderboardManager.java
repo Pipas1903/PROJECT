@@ -36,7 +36,7 @@ public class LeaderboardManager {
     }
 
 
-    public static void insertScore(String nickName, int score, GamesInfo game) {
+    private static void insertScore(String nickName, int score, GamesInfo game) {
 
         String temp = readFile(game);
         BufferedWriter writer = null;
@@ -106,7 +106,7 @@ public class LeaderboardManager {
     }
 
 
-    public static void writeOrdered(GamesInfo game, String orderedScores) {
+    private static void writeOrdered(GamesInfo game, String orderedScores) {
         BufferedWriter writer = null;
 
         try {

@@ -12,6 +12,8 @@ public class Player {
         this.score = 0;
     }
 
+    public Player(){}
+
     public int getConsecutiveRoundsWon() {
         return consecutiveRoundsWon;
     }

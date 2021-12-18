@@ -11,21 +11,26 @@ public class Messages {
     // INVALID INPUT MESSAGES
     public static final String INVALID_INPUT = "INVALID INPUT ";
     public static final String TRY_AGAIN = "please try again";
-    public static final String NICKNAME_ALREADY_EXISTS = "nickname already exists";
-    public static final String UNEXPECTED_ERROR = "UNEXPECTED ERROR. TRY AGAIN.";
-    public static final String NICKNAME_NOT_FOUND = "nickname not found";
+    public static final String NICKNAME_ALREADY_EXISTS = "NICKNAME ALREADY EXISTS";
+    public static final String UNEXPECTED_ERROR = "UNEXPECTED ERROR. RESTART THE GAME.";
+    public static final String NICKNAME_NOT_FOUND = "NICKNAME NOT FOUND";
+    public static final String CANT_CHOOSE_SAME_PLAYER = "YOU CAN'T SELECT THE SAME PLAYER";
 
     public static final String SUCCESS = "OPERATION SUCCESSFUL";
 
-    public static final String ARCADE =
-            " _______  _______  _______  _______  ______   _______ \n" +
-            "(  ___  )(  ____ )(  ____ \\(  ___  )(  __  \\ (  ____ \\\n" +
-            "| (   ) || (    )|| (    \\/| (   ) || (  \\  )| (    \\/\n" +
-            "| (___) || (____)|| |      | (___) || |   ) || (__    \n" +
-            "|  ___  ||     __)| |      |  ___  || |   | ||  __)   \n" +
-            "| (   ) || (\\ (   | |      | (   ) || |   ) || (      \n" +
-            "| )   ( || ) \\ \\__| (____/\\| )   ( || (__/  )| (____/\\\n" +
-            "|/     \\||/   \\__/(_______/|/     \\|(______/ (_______/";
+
+    public static final String ARCADE = "\n" +
+                    " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.\n" +
+                    "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+                    "| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |\n" +
+                    "| |     /  \\     | || | |_   __ \\    | || |   .' ___  |  | || |     /  \\     | || | |_   ___ `.  | || | |_   ___  |  | |\n" +
+                    "| |    / /\\ \\    | || |   | |__) |   | || |  / .'   \\_|  | || |    / /\\ \\    | || |   | |   `. \\ | || |   | |_  \\_|  | |\n" +
+                    "| |   / ____ \\   | || |   |  __ /    | || |  | |         | || |   / ____ \\   | || |   | |    | | | || |   |  _|  _   | |\n" +
+                    "| | _/ /    \\ \\_ | || |  _| |  \\ \\_  | || |  \\ `.___.'\\  | || | _/ /    \\ \\_ | || |  _| |___.' / | || |  _| |___/ |  | |\n" +
+                    "| ||____|  |____|| || | |____| |___| | || |   `._____.'  | || ||____|  |____|| || | |________.'  | || | |_________|  | |\n" +
+                    "| |              | || |              | || |              | || |              | || |              | || |              | |\n" +
+                    "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+                    " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'\n";
     public static final String WELCOME_TO_ARCADE = " WELCOME TO THE ARCADE ";
     public static final String PRESS_ENTER = " *press enter to continue*  ";
 
@@ -58,10 +63,10 @@ public class Messages {
 
     // MENUS
     public static final String TO_DO = "What do you wish to do?";
-    public static final String INSERT_NUMBER = "insert correspondent number";
+    public static final String INSERT_NUMBER = "---insert number---";
     public static final String EXIT_OPTION = "0. quit";
     public static final String BACK_OPTION = "Back";
-    public static final String SEE_PLAYER_LEADERBOARD="see player score history";
+    public static final String SEE_PLAYER_LEADERBOARD="See player score history";
 
     public static final String HOW_MANY_PLAYERS = "How many players will there be?";
     public static final String ONE_PLAYER = "1. one player";

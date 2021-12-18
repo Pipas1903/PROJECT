@@ -31,10 +31,10 @@ public class AsciiArt {
         AsciiArt artGen = new AsciiArt();
 
         System.out.println();
-        artGen.printTextArt(".|.", AsciiArt.ART_SIZE_HUGE);
+        artGen.printTextArt("hello", AsciiArt.ART_SIZE_HUGE);
         System.out.println();
 
-        artGen.printTextArt("((i))", ART_SIZE_MEDIUM,ASCIIArtFont.ART_FONT_DIALOG, "");
+        artGen.printTextArt("lima", ART_SIZE_MEDIUM,ASCIIArtFont.ART_FONT_MONO, "#");
 
         System.out.println();
         artGen.printTextArt("love", AsciiArt.ART_SIZE_HUGE, ASCIIArtFont.ART_FONT_MONO, "");

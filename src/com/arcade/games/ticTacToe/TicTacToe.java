@@ -19,7 +19,7 @@ public class TicTacToe {
     private String lastWinner = "";
     private String aiSymbol;
 
-    private int rounds = 3;
+    private int rounds = 1;
     private int points = 21;
 
 
@@ -59,11 +59,18 @@ public class TicTacToe {
             System.out.println(Messages.ROUND + (i + 1));
             startRound2Players();
         }
+        System.out.println();
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         PlayerManager.addScoreToPlayerFile(playerTwo.getNickname(), playerTwo.getCurrentScore(), game);
         LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
         LeaderboardManager.manageScores(game, playerTwo.getNickname(), playerTwo.getCurrentScore());
+        System.out.println(Messages.PRESS_ENTER);
+        Utils.scanString.nextLine();
+        System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println(Constants.ANSI_BLUE + playerTwo.getNickname() + " -> " + playerTwo.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println();
         System.out.println(Messages.GREAT_GAME);
+        System.out.println();
     }
 
 
@@ -301,9 +308,15 @@ public class TicTacToe {
             startRound1Player();
 
         }
+        System.out.println();
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
+        System.out.println(Messages.PRESS_ENTER);
+        Utils.scanString.nextLine();
+        System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println();
         System.out.println(Messages.GREAT_GAME);
+        System.out.println();
     }
 
     private void hasPCWon() {

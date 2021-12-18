@@ -14,4 +14,5 @@ public enum GamesInfo {
         this.path = path;
         this.rules = rules;
     }
+
 }

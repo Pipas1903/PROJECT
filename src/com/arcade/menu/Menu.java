@@ -34,6 +34,7 @@ public class Menu {
             System.out.println(Messages.HOW_MANY_PLAYERS);
             System.out.println(Messages.ONE_PLAYER);
             System.out.println(Messages.TWO_PLAYERS);
+            System.out.println("3. " + Messages.BACK_OPTION);
             System.out.println(Messages.EXIT_OPTION);
 
             String choice = getChoice();
@@ -108,6 +109,14 @@ public class Menu {
                     System.out.println();
                     System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
                     Player playerOpt2 = PlayerManager.playerSelection();
+
+                    if (numberOfPlayers == 2) {
+                        while (playerOpt2.getNickname().equals(playerOne.getNickname())) {
+                            System.out.println(Messages.CANT_CHOOSE_SAME_PLAYER);
+                            playerOpt2 = PlayerManager.playerSelection();
+                        }
+                    }
+
                     System.out.println(Messages.SUCCESS);
                     return playerOpt2;
 
@@ -163,7 +172,9 @@ public class Menu {
 
                 case "4":
                     System.out.println();
-                    createSelectPlayer();
+                    this.playerOne = new Player();
+                    this.playerTwo = new Player();
+                    chooseNumberOfPlayers();
                     break;
 
                 case "0":
