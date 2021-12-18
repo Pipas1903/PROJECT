@@ -79,6 +79,7 @@ public class Menu {
                 default:
                     System.out.println();
                     System.out.println(Messages.INVALID_INPUT);
+                    System.out.println();
                     break;
             }
         }
@@ -110,7 +111,7 @@ public class Menu {
                     System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
                     Player playerOpt2 = PlayerManager.playerSelection();
 
-                    if (numberOfPlayers == 2) {
+                    if (numberOfPlayers == 2 && playerOne!=null) {
                         while (playerOpt2.getNickname().equals(playerOne.getNickname())) {
                             System.out.println(Messages.CANT_CHOOSE_SAME_PLAYER);
                             playerOpt2 = PlayerManager.playerSelection();
@@ -134,6 +135,7 @@ public class Menu {
                 default:
                     System.out.println();
                     System.out.println(Messages.INVALID_INPUT);
+                    System.out.println();
                     break;
             }
         }
@@ -186,6 +188,7 @@ public class Menu {
                     System.out.println();
                     System.out.println(Messages.INVALID_INPUT);
                     System.out.println(Messages.TRY_AGAIN);
+                    System.out.println();
                     break;
             }
         }
