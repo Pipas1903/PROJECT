@@ -24,8 +24,11 @@ public class RockPaperScissors {
 
     int rounds = 10;
     int points = 21;
+    int pcPoints = 0;
     Moves moves;
+
     private String winner;
+    private String lastWinner;
 
     public RockPaperScissors(Player player) {
         this.playerOne = player;
@@ -36,9 +39,48 @@ public class RockPaperScissors {
         this.playerTwo = playerTwo;
     }
 
-    public void startGame1Players() {
+    public void startGame1Players() throws IOException {
+        playerOne.setCurrentScore(0);
 
+        System.out.println(Constants.ANSI_YELLOW + Messages.WELCOME_TO_ROCK_PAPER_SCISSORS + Constants.ANSI_RESET);
+        System.out.println();
 
+        System.out.println(Messages.PRESS_ENTER);
+        Utils.scanString.nextLine();
+
+        for (int i = 1; i <= rounds; i++) {
+            System.out.println(Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_BLACK + Messages.ROUND + i + Constants.ANSI_RESET);
+            System.out.println();
+
+            System.out.println(playerOne.getNickname() + Messages.ENTER_YOUR_MOVE);
+            System.out.println("    * 1 rock\n    * 2 paper\n    * 3 scissors ");
+
+            String chosenMove = Utils.scanString.nextLine();
+
+            Moves playerMove = null;
+            switch (chosenMove) {
+                case "1":
+                    playerMove = Moves.ROCK;
+                    break;
+                case "2":
+                    playerMove = Moves.PAPER;
+                    break;
+                case "3":
+                    playerMove = Moves.SCISSORS;
+                    break;
+            }
+            Moves pcMove = Moves.getRandomMove();
+            winner = playerMove.play(pcMove, playerOne.getNickname());
+            System.out.println(playerOne.getNickname() + ": " + playerMove + " vs " + Messages.PC + ": " + pcMove);
+            assignPoints(playerOne);
+            System.out.println(Messages.ANNOUNCE_WINNER + winner);
+        }
+        System.out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > pcPoints ? playerOne.getNickname() : Messages.PC));
+
+        PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
+        LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
+
+        System.out.println(Messages.GREAT_GAME);
     }
 
     public void startGame2Players() throws IOException {
@@ -113,18 +155,20 @@ public class RockPaperScissors {
         if (player2Chose.equals(playerChose)) {
             System.out.println("it's a tie");
             winner = "tie";
+            lastWinner = "";
             return;
         }
 
         if ((player2Chose.equalsIgnoreCase("ROCK") && playerChose.equalsIgnoreCase("PAPER")) || player2Chose.equalsIgnoreCase("PAPER") && playerChose.equalsIgnoreCase("SCISSORS") || player2Chose.equalsIgnoreCase("SCISSORS") && playerChose.equalsIgnoreCase("ROCK")) {
             System.out.println(Messages.ANNOUNCE_WINNER + playerOne.getNickname());
             winner = playerOne.getNickname();
-            playerOne.setCurrentScore(playerOne.getCurrentScore() + points);
+            assignPoints(playerOne);
             return;
         }
 
         System.out.println(Messages.ANNOUNCE_WINNER + playerTwo.getNickname());
         winner = playerTwo.getNickname();
+        assignPoints(playerTwo);
         playerTwo.setCurrentScore(playerTwo.getCurrentScore() + points);
     }
 
@@ -164,5 +208,15 @@ public class RockPaperScissors {
         return !playerMove.equalsIgnoreCase(String.valueOf(Moves.PAPER)) && !playerMove.equalsIgnoreCase(String.valueOf(Moves.ROCK)) && !playerMove.equalsIgnoreCase(String.valueOf(Moves.SCISSORS));
     }
 
+    private void assignPoints(Player player) {
+        if (lastWinner.isEmpty() || (!lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname()))) {
+            player.setConsecutiveRoundsWon(0);
+            player.setCurrentScore(player.getCurrentScore() + points);
+        }
+        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
+            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
+            player.setCurrentScore(player.getCurrentScore() + player.getConsecutiveRoundsWon() * points * 2);
+        }
+    }
 }
 

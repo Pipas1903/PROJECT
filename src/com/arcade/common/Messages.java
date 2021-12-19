@@ -61,6 +61,7 @@ public class Messages {
     public static final String ENTER_YOUR_MOVE = " enter your move";
     public static final String WAITING_FOR_PLAYER_1= "...waiting for player one...";
     public static final String WAITING_FOR_PLAYER_2= "...waiting for player two...";
+    public static final String ROCK_PAPER_SCISSORS_WARNING_NUMBER_OF_PLAYERS = "You'll still have to create or select a player profile for player 2, so that their history of scores can be updated\nand they can participate on the leaderboard.";
 
 
     // GAME RULES

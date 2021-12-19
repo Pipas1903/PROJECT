@@ -31,6 +31,9 @@ public class Menu {
 
         while (true) {
 
+            System.out.println(Messages.WARNING);
+            System.out.println(Messages.ROCK_PAPER_SCISSORS_WARNING_NUMBER_OF_PLAYERS);
+            System.out.println();
             System.out.println(Messages.HOW_MANY_PLAYERS);
             System.out.println(Messages.ONE_PLAYER);
             System.out.println(Messages.TWO_PLAYERS);
