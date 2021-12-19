@@ -100,6 +100,7 @@ public class RockPaperScissors {
         LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
 
         System.out.println(Messages.GREAT_GAME);
+
     }
 
     public void startGame2Players() throws IOException {
@@ -141,6 +142,7 @@ public class RockPaperScissors {
         LeaderboardManager.manageScores(game, playerTwo.getNickname(), playerTwo.getCurrentScore());
 
         printEndGameStats();
+        clientSocket.close();
     }
 
     private void printEndGameStats() {
