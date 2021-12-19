@@ -27,8 +27,8 @@ public class RockPaperScissors {
     int pcPoints = 0;
     Moves moves;
 
-    private String winner;
-    private String lastWinner;
+    private String winner = "";
+    private String lastWinner = "";
 
     public RockPaperScissors(Player player) {
         this.playerOne = player;
@@ -58,6 +58,7 @@ public class RockPaperScissors {
             String chosenMove = Utils.scanString.nextLine();
 
             Moves playerMove = null;
+
             switch (chosenMove) {
                 case "1":
                     playerMove = Moves.ROCK;
@@ -69,12 +70,22 @@ public class RockPaperScissors {
                     playerMove = Moves.SCISSORS;
                     break;
             }
+
             Moves pcMove = Moves.getRandomMove();
+
             winner = playerMove.play(pcMove, playerOne.getNickname());
+
             System.out.println(playerOne.getNickname() + ": " + playerMove + " vs " + Messages.PC + ": " + pcMove);
-            assignPoints(playerOne);
+
+            if (winner.equals(playerOne.getNickname())) {
+                assignPoints(playerOne);
+            }
             System.out.println(Messages.ANNOUNCE_WINNER + winner);
+            System.out.println();
         }
+        System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println(Constants.ANSI_PURPLE + Messages.PC + " -> " + pcPoints + Constants.ANSI_RESET);
+        System.out.println();
         System.out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > pcPoints ? playerOne.getNickname() : Messages.PC));
 
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
