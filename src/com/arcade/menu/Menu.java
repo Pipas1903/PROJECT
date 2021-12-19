@@ -166,6 +166,10 @@ public class Menu {
 
                 case "2":
                     System.out.println();
+                    if (numberOfPlayers == 2) {
+                        System.out.println(Messages.WARNING);
+                        Utils.scanString.nextLine();
+                    }
                     gameOptions(GamesInfo.ROCK_PAPER_SCISSORS);
                     break;
 

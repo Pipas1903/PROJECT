@@ -16,6 +16,8 @@ public class Messages {
     public static final String NICKNAME_NOT_FOUND = Constants.ANSI_RED + "NICKNAME NOT FOUND" + Constants.ANSI_RESET;
     public static final String CANT_CHOOSE_SAME_PLAYER = Constants.ANSI_RED + "YOU CAN'T SELECT THE SAME PLAYER" + Constants.ANSI_RESET;
 
+    public static final String WARNING = Constants.ANSI_RED + "Warning! To play with 2 players, you need another machine!" + Constants.ANSI_RESET + "IP: 127.0.0.1\nPort: 92";
+
     public static final String SUCCESS = Constants.ANSI_GREEN + "OPERATION SUCCESSFUL" + Constants.ANSI_RESET;
 
 
@@ -51,7 +53,15 @@ public class Messages {
     public static final String ANNOUNCE_WINNER = "The winner is: ";
     public static final String PC = "PC";
 
-    public static final String BULLET_POINT = " * ";
+    // ROCK PAPER SCISSORS MESSAGES
+    public static final String WELCOME_TO_ROCK_PAPER_SCISSORS = "Welcome to Rock, Paper, Scissors!";
+    public static final String REMEMBER = "Remember, to play with 2 players, you need two computers, so make sure the second player is connected to start playing!";
+    public static final String CONNECTED = Constants.ANSI_GREEN + "PLAYER TWO CONNECTED" + Constants.ANSI_RESET;
+    public static final String WAITING = "...waiting for someone to connect...";
+    public static final String ENTER_YOUR_MOVE = " enter your move";
+    public static final String WAITING_FOR_PLAYER_1= "...waiting for player one...";
+    public static final String WAITING_FOR_PLAYER_2= "...waiting for player two...";
+
 
     // GAME RULES
     public static final String RULES = "RULES: ";
