@@ -5,7 +5,7 @@ public class Messages {
     public static final String WELCOME_TO_PLAYER_CREATION = "Welcome to player creation!";
     public static final String CHOOSE_NICKNAME = "Insert a 3 character nickname: ";
     public static final String WELCOME_TO_PLAYER_SELECTION = "Welcome to player selection!";
-    public static final String WELCOME_TO_GAME_SELECTION = "Which game do you wish to play?";
+    public static final String WELCOME_TO_GAME_SELECTION = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "Which game do you wish to play?" + Constants.ANSI_RESET;
     public static final String BYE = Constants.ANSI_GREEN_BACKGROUND + Constants.ANSI_BLACK + "Bye! Until next time!" + Constants.ANSI_RESET;
 
     // INVALID INPUT MESSAGES
@@ -42,8 +42,8 @@ public class Messages {
     public static final String ROUND = "ROUND ";
 
     // TIC TAC TOE MESSAGES
-    public static final String CHOOSE_SYMBOL = "which symbol would you like to use? ";
-    public static final String CHOOSE_COORDINATES = "please enter the coordinates where you want to place your piece: ";
+    public static final String CHOOSE_SYMBOL = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "which symbol would you like to use? " + Constants.ANSI_RESET;
+    public static final String CHOOSE_COORDINATES = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "please enter the coordinates where you want to place your piece: " + Constants.ANSI_RESET;
     public static final String OCCUPIED_TILE = Constants.ANSI_RED + "That tile is already occupied! Try another one!" + Constants.ANSI_RESET;
     public static final String ILLEGAL_MOVE = Constants.ANSI_RED + "That move is ilegal!" + Constants.ANSI_RESET;
     public static final String TIE = "tie";
@@ -62,13 +62,13 @@ public class Messages {
     public static final String POINT_ATTRIBUTION_RULES = "Each round won counts as 21 points. If you win several rounds in a row, your points will scale exponentially.";
 
     // MENUS
-    public static final String TO_DO = "What do you wish to do?";
+    public static final String TO_DO = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "What do you wish to do?" + Constants.ANSI_RESET;
     public static final String INSERT_NUMBER = "---insert number---";
     public static final String EXIT_OPTION = "0. quit";
     public static final String BACK_OPTION = "Back";
     public static final String SEE_PLAYER_LEADERBOARD = "See player score history";
 
-    public static final String HOW_MANY_PLAYERS = "How many players will there be?";
+    public static final String HOW_MANY_PLAYERS = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "How many players will there be?" + Constants.ANSI_RESET;
     public static final String ONE_PLAYER = "1. one player";
     public static final String TWO_PLAYERS = "2. two players";
 

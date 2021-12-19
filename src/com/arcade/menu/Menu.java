@@ -32,10 +32,8 @@ public class Menu {
         while (true) {
 
             System.out.println(Messages.HOW_MANY_PLAYERS);
-            System.out.println();
             System.out.println(Messages.ONE_PLAYER);
             System.out.println(Messages.TWO_PLAYERS);
-            System.out.println("3. " + Messages.BACK_OPTION);
             System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
             System.out.println();
             System.out.println(Messages.INSERT_NUMBER);
@@ -92,7 +90,6 @@ public class Menu {
         while (true) {
 
             System.out.println(Messages.TO_DO);
-            System.out.println();
             System.out.println(Messages.CREATE_PLAYER);
             System.out.println(Messages.SELECT_PLAYER);
             System.out.println("3. " + Messages.BACK_OPTION);
@@ -149,7 +146,6 @@ public class Menu {
         while (true) {
 
             System.out.println(Messages.WELCOME_TO_GAME_SELECTION);
-            System.out.println();
             System.out.println(Messages.PLAY_TIC_TAC_TOE);
             System.out.println(Messages.PLAY_ROCK_PAPER_SCISSORS);
             System.out.println(Messages.PLAY_FOUR_IN_LINE);
@@ -203,7 +199,6 @@ public class Menu {
 
         while (true) {
             System.out.println(Messages.TO_DO);
-            System.out.println();
             System.out.println(Messages.SEE_GAME_RULES);
             System.out.println(Messages.SEE_POINT_RULES);
             System.out.println(Messages.PLAY);
