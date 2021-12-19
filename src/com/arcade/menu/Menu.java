@@ -336,17 +336,6 @@ public class Menu {
         PlayerManager.printPlayerScoreHistory(player.getNickname());
     }
 
-    public void eighthMenu() {
-        /*play again?
-        quit -> back to 2nd menu
-        */
-    }
-
-    public void ninthMenu() {
-
-    }
-
-
     private String getChoice() {
 
         String choice = Utils.scanString.nextLine();

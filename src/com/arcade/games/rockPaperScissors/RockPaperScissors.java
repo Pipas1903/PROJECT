@@ -56,6 +56,10 @@ public class RockPaperScissors {
             System.out.println("    * 1 rock\n    * 2 paper\n    * 3 scissors ");
 
             String chosenMove = Utils.scanString.nextLine();
+            while (isMoveIlegal(chosenMove)) {
+                System.out.println(Messages.ILLEGAL_MOVE);
+                chosenMove = Utils.scanString.nextLine();
+            }
 
             Moves playerMove = null;
 
@@ -228,6 +232,10 @@ public class RockPaperScissors {
             player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
             player.setCurrentScore(player.getCurrentScore() + player.getConsecutiveRoundsWon() * points * 2);
         }
+    }
+
+    private boolean isMoveIlegal(String chosenMove) {
+        return !(chosenMove.matches("[1-3]"));
     }
 }
 

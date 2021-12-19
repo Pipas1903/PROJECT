@@ -16,7 +16,7 @@ public class Messages {
     public static final String NICKNAME_NOT_FOUND = Constants.ANSI_RED + "NICKNAME NOT FOUND" + Constants.ANSI_RESET;
     public static final String CANT_CHOOSE_SAME_PLAYER = Constants.ANSI_RED + "YOU CAN'T SELECT THE SAME PLAYER" + Constants.ANSI_RESET;
 
-    public static final String WARNING = Constants.ANSI_RED + "Warning! To play with 2 players, you need another machine!" + Constants.ANSI_RESET + "IP: 127.0.0.1\nPort: 92";
+    public static final String WARNING = Constants.ANSI_RED + "Warning! To play rock paper scissors with 2 players, you need another machine!" + Constants.ANSI_RESET + "\nTo connect enter 'nc 127.0.0.1 92' on the other machine terminal.";
 
     public static final String SUCCESS = Constants.ANSI_GREEN + "OPERATION SUCCESSFUL" + Constants.ANSI_RESET;
 
