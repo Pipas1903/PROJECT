@@ -32,11 +32,13 @@ public class Menu {
         while (true) {
 
             System.out.println(Messages.HOW_MANY_PLAYERS);
+            System.out.println();
             System.out.println(Messages.ONE_PLAYER);
             System.out.println(Messages.TWO_PLAYERS);
             System.out.println("3. " + Messages.BACK_OPTION);
-            System.out.println(Messages.EXIT_OPTION);
-
+            System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
+            System.out.println();
+            System.out.println(Messages.INSERT_NUMBER);
             String choice = getChoice();
 
             switch (choice) {
@@ -90,11 +92,13 @@ public class Menu {
         while (true) {
 
             System.out.println(Messages.TO_DO);
-            System.out.println(Messages.INSERT_NUMBER);
+            System.out.println();
             System.out.println(Messages.CREATE_PLAYER);
             System.out.println(Messages.SELECT_PLAYER);
-            System.out.println(Messages.EXIT_OPTION);
-
+            System.out.println("3. " + Messages.BACK_OPTION);
+            System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
+            System.out.println();
+            System.out.println(Messages.INSERT_NUMBER);
             String choice = getChoice();
 
             switch (choice) {
@@ -111,7 +115,7 @@ public class Menu {
                     System.out.println(Messages.WELCOME_TO_PLAYER_SELECTION);
                     Player playerOpt2 = PlayerManager.playerSelection();
 
-                    if (numberOfPlayers == 2 && playerOne!=null) {
+                    if (numberOfPlayers == 2 && playerOne != null) {
                         while (playerOpt2.getNickname().equals(playerOne.getNickname())) {
                             System.out.println(Messages.CANT_CHOOSE_SAME_PLAYER);
                             playerOpt2 = PlayerManager.playerSelection();
@@ -123,7 +127,6 @@ public class Menu {
 
                 case "3":
                     System.out.println();
-                    System.out.println("3. " + Messages.BACK_OPTION);
                     chooseNumberOfPlayers();
                     break;
 
@@ -146,12 +149,14 @@ public class Menu {
         while (true) {
 
             System.out.println(Messages.WELCOME_TO_GAME_SELECTION);
-            System.out.println(Messages.INSERT_NUMBER);
+            System.out.println();
             System.out.println(Messages.PLAY_TIC_TAC_TOE);
             System.out.println(Messages.PLAY_ROCK_PAPER_SCISSORS);
             System.out.println(Messages.PLAY_FOUR_IN_LINE);
             System.out.println("4. " + Messages.BACK_OPTION);
-            System.out.println(Messages.EXIT_OPTION);
+            System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
+            System.out.println();
+            System.out.println(Messages.INSERT_NUMBER);
 
             String choice = getChoice();
 
@@ -198,14 +203,16 @@ public class Menu {
 
         while (true) {
             System.out.println(Messages.TO_DO);
-            System.out.println(Messages.INSERT_NUMBER);
+            System.out.println();
             System.out.println(Messages.SEE_GAME_RULES);
             System.out.println(Messages.SEE_POINT_RULES);
             System.out.println(Messages.PLAY);
             System.out.println("4. " + Messages.SEE_PLAYER_LEADERBOARD);
             System.out.println("5. " + Messages.SEE_GAME_LEADERBOARD);
             System.out.println("6. " + Messages.BACK_OPTION);
-            System.out.println(Messages.EXIT_OPTION);
+            System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
+            System.out.println();
+            System.out.println(Messages.INSERT_NUMBER);
 
             String choice = getChoice();
 

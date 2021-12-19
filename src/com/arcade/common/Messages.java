@@ -6,46 +6,46 @@ public class Messages {
     public static final String CHOOSE_NICKNAME = "Insert a 3 character nickname: ";
     public static final String WELCOME_TO_PLAYER_SELECTION = "Welcome to player selection!";
     public static final String WELCOME_TO_GAME_SELECTION = "Which game do you wish to play?";
-    public static final String BYE = "Bye! Until next time!";
+    public static final String BYE = Constants.ANSI_GREEN_BACKGROUND + Constants.ANSI_BLACK + "Bye! Until next time!" + Constants.ANSI_RESET;
 
     // INVALID INPUT MESSAGES
-    public static final String INVALID_INPUT = "INVALID INPUT ";
-    public static final String TRY_AGAIN = "please try again";
-    public static final String NICKNAME_ALREADY_EXISTS = "NICKNAME ALREADY EXISTS";
-    public static final String UNEXPECTED_ERROR = "UNEXPECTED ERROR. RESTART THE GAME.";
-    public static final String NICKNAME_NOT_FOUND = "NICKNAME NOT FOUND";
-    public static final String CANT_CHOOSE_SAME_PLAYER = "YOU CAN'T SELECT THE SAME PLAYER";
+    public static final String INVALID_INPUT = Constants.ANSI_RED + "INVALID INPUT " + Constants.ANSI_RESET;
+    public static final String TRY_AGAIN = Constants.ANSI_RED + "please try again" + Constants.ANSI_RESET;
+    public static final String NICKNAME_ALREADY_EXISTS = Constants.ANSI_RED + "NICKNAME ALREADY EXISTS" + Constants.ANSI_RESET;
+    public static final String UNEXPECTED_ERROR = Constants.ANSI_RED + "UNEXPECTED ERROR. RESTART THE GAME." + Constants.ANSI_RESET;
+    public static final String NICKNAME_NOT_FOUND = Constants.ANSI_RED + "NICKNAME NOT FOUND" + Constants.ANSI_RESET;
+    public static final String CANT_CHOOSE_SAME_PLAYER = Constants.ANSI_RED + "YOU CAN'T SELECT THE SAME PLAYER" + Constants.ANSI_RESET;
 
-    public static final String SUCCESS = "OPERATION SUCCESSFUL";
+    public static final String SUCCESS = Constants.ANSI_GREEN + "OPERATION SUCCESSFUL" + Constants.ANSI_RESET;
 
 
-    public static final String ARCADE = "\n" +
-                    " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.\n" +
-                    "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
-                    "| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |\n" +
-                    "| |     /  \\     | || | |_   __ \\    | || |   .' ___  |  | || |     /  \\     | || | |_   ___ `.  | || | |_   ___  |  | |\n" +
-                    "| |    / /\\ \\    | || |   | |__) |   | || |  / .'   \\_|  | || |    / /\\ \\    | || |   | |   `. \\ | || |   | |_  \\_|  | |\n" +
-                    "| |   / ____ \\   | || |   |  __ /    | || |  | |         | || |   / ____ \\   | || |   | |    | | | || |   |  _|  _   | |\n" +
-                    "| | _/ /    \\ \\_ | || |  _| |  \\ \\_  | || |  \\ `.___.'\\  | || | _/ /    \\ \\_ | || |  _| |___.' / | || |  _| |___/ |  | |\n" +
-                    "| ||____|  |____|| || | |____| |___| | || |   `._____.'  | || ||____|  |____|| || | |________.'  | || | |_________|  | |\n" +
-                    "| |              | || |              | || |              | || |              | || |              | || |              | |\n" +
-                    "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
-                    " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'";
-    public static final String WELCOME_TO_ARCADE = " WELCOME TO THE ARCADE ";
+    public static final String ARCADE = "\n" + Constants.ANSI_YELLOW +
+            " .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.\n" +
+            "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" +
+            "| |      __      | || |  _______     | || |     ______   | || |      __      | || |  ________    | || |  _________   | |\n" +
+            "| |     /  \\     | || | |_   __ \\    | || |   .' ___  |  | || |     /  \\     | || | |_   ___ `.  | || | |_   ___  |  | |\n" +
+            "| |    / /\\ \\    | || |   | |__) |   | || |  / .'   \\_|  | || |    / /\\ \\    | || |   | |   `. \\ | || |   | |_  \\_|  | |\n" +
+            "| |   / ____ \\   | || |   |  __ /    | || |  | |         | || |   / ____ \\   | || |   | |    | | | || |   |  _|  _   | |\n" +
+            "| | _/ /    \\ \\_ | || |  _| |  \\ \\_  | || |  \\ `.___.'\\  | || | _/ /    \\ \\_ | || |  _| |___.' / | || |  _| |___/ |  | |\n" +
+            "| ||____|  |____|| || | |____| |___| | || |   `._____.'  | || ||____|  |____|| || | |________.'  | || | |_________|  | |\n" +
+            "| |              | || |              | || |              | || |              | || |              | || |              | |\n" +
+            "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" +
+            " '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'" + Constants.ANSI_RESET;
+
     public static final String PRESS_ENTER = " *press enter to continue*  ";
 
     public static final String NICKNAME = "Nickname: ";
 
     // ALL GAMES
-    public static final String ARE_YOU_READY = "Are you ready?\nLet's play: ";
-    public static final String GREAT_GAME = "Great game! Until next time!";
+    public static final String ARE_YOU_READY = Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_WHITE + "Are you ready?\nLet's play: " + Constants.ANSI_RESET;
+    public static final String GREAT_GAME = Constants.ANSI_GREEN_BACKGROUND + "Great game! Until next time!\n" + Constants.ANSI_RESET;
     public static final String ROUND = "ROUND ";
 
     // TIC TAC TOE MESSAGES
     public static final String CHOOSE_SYMBOL = "which symbol would you like to use? ";
     public static final String CHOOSE_COORDINATES = "please enter the coordinates where you want to place your piece: ";
-    public static final String OCCUPIED_TILE = "That tile is already occupied! Try another one!";
-    public static final String ILLEGAL_MOVE = "That move is ilegal!";
+    public static final String OCCUPIED_TILE = Constants.ANSI_RED + "That tile is already occupied! Try another one!" + Constants.ANSI_RESET;
+    public static final String ILLEGAL_MOVE = Constants.ANSI_RED + "That move is ilegal!" + Constants.ANSI_RESET;
     public static final String TIE = "tie";
     public static final String TIE_ANNOUNCE = "It's a tie!";
     public static final String ANNOUNCE_WINNER = "The winner is: ";
@@ -66,7 +66,7 @@ public class Messages {
     public static final String INSERT_NUMBER = "---insert number---";
     public static final String EXIT_OPTION = "0. quit";
     public static final String BACK_OPTION = "Back";
-    public static final String SEE_PLAYER_LEADERBOARD="See player score history";
+    public static final String SEE_PLAYER_LEADERBOARD = "See player score history";
 
     public static final String HOW_MANY_PLAYERS = "How many players will there be?";
     public static final String ONE_PLAYER = "1. one player";
