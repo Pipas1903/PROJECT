@@ -19,8 +19,9 @@ public class TicTacToe {
     private String lastWinner = "";
     private String aiSymbol;
     private int pcScore;
+    private boolean isFirstRound = true;
 
-    private int rounds = 1;
+    private int rounds = 2;
     private int points = 21;
 
 
@@ -55,6 +56,7 @@ public class TicTacToe {
     public void startGame2Players() throws IOException {
         playerOne.setCurrentScore(0);
         playerTwo.setCurrentScore(0);
+        lastWinner = "";
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol2Player();
         for (int i = 0; i < rounds; i++) {
@@ -62,6 +64,7 @@ public class TicTacToe {
             System.out.println(Messages.ROUND + (i + 1));
             startRound2Players();
         }
+
         System.out.println();
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         PlayerManager.addScoreToPlayerFile(playerTwo.getNickname(), playerTwo.getCurrentScore(), game);
@@ -164,6 +167,7 @@ public class TicTacToe {
         if (board[0][0] == player.getSymbol() && board[1][1] == player.getSymbol() && board[2][2] == player.getSymbol() || (board[0][2] == player.getSymbol() && board[2][0] == player.getSymbol() && board[1][1] == player.getSymbol())) {
             winner = player.getNickname();
         }
+
         lastWinner = player.getNickname();
     }
 
@@ -209,13 +213,20 @@ public class TicTacToe {
 
 
     private void assignPoints(Player player) {
+        if (isFirstRound) {
+            player.setCurrentScore(points);
+            isFirstRound = false;
+            return;
+        }
+
+        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
+            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
+            player.setCurrentScore(player.getCurrentScore() + (player.getConsecutiveRoundsWon() * points * 2));
+            return;
+        }
         if (lastWinner.isEmpty() || (!lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname()))) {
             player.setConsecutiveRoundsWon(0);
             player.setCurrentScore(player.getCurrentScore() + points);
-        }
-        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
-            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
-            player.setCurrentScore(player.getCurrentScore() + player.getConsecutiveRoundsWon() * points * 2);
         }
     }
 
@@ -305,6 +316,8 @@ public class TicTacToe {
     }
 
     public void startGame1Players() throws IOException {
+        playerOne.setCurrentScore(0);
+        lastWinner = "";
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol1Player();
         for (int i = 0; i < rounds; i++) {

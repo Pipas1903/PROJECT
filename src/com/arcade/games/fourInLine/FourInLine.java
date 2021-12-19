@@ -16,13 +16,17 @@ public class FourInLine {
 
     private Player playerOne;
     private Player playerTwo;
+
     private String winner = "";
     private String lastWinner = "";
-    private String aiSymbol;
+
+    private String pcSymbol;
     private int pcScore;
 
+    private boolean isFirstRound = true;
+
     private int points = 21;
-    private int rounds = 1;
+    private int rounds = 2;
 
     private String[][] board = new String[6][7];
 
@@ -35,70 +39,93 @@ public class FourInLine {
         this.playerTwo = playerTwo;
     }
 
-    // 1 Player Vs Ai
+    // 1 PLAYER AGAINST COMPUTER
     public void startGame1Players() throws IOException {
+        playerOne.setCurrentScore(0);
+
         System.out.println(Messages.ARE_YOU_READY + Constants.FOUR_IN_LINE);
+
         chooseSymbol1Player();
+
         for (int i = 0; i < rounds; i++) {
             System.out.println(Messages.ROUND + (i + 1));
             startRound1Player();
         }
+
         System.out.println();
+
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
+
         System.out.println(Messages.PRESS_ENTER);
         Utils.scanString.nextLine();
+
         System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
-        System.out.println(Constants.ANSI_PURPLE + Messages.PC + " -> " + pcScore + Constants.ANSI_RESET);
+        System.out.println(Constants.ANSI_BLUE + Messages.PC + " -> " + pcScore + Constants.ANSI_RESET);
         System.out.println();
         System.out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > pcScore ? playerOne.getNickname() : Messages.PC));
         System.out.println();
         System.out.println(Messages.GREAT_GAME);
         System.out.println();
+        System.out.println(Messages.PRESS_ENTER);
+        Utils.scanString.nextLine();
     }
 
     private void startRound1Player() {
+
         do {
-            clearScreen();
+
             turn(playerOne);
             hasPlayerWon(playerOne);
-            pcPlacePieceInBoard(pcChooseTile(aiFindPossibleMoves()));
+            pcPlacePieceInBoard(pcChooseTile(pcFindPossibleMoves()));
             hasPCWon();
+
         } while (winner.isEmpty());
+
         end();
+
         board = new String[6][7];
         winner = "";
     }
 
     private void chooseSymbol1Player() {
         System.out.println(playerOne.getNickname() + " - " + Messages.CHOOSE_SYMBOL + Constants.X + " or " + Constants.O);
+
         do {
+
             String chosen = Utils.scanString.nextLine();
+
             if (!chosen.equalsIgnoreCase(Constants.X) && !chosen.equalsIgnoreCase(Constants.O)) {
                 System.out.println(Messages.INVALID_INPUT);
                 System.out.println(Messages.TRY_AGAIN);
+
             } else if (chosen.equalsIgnoreCase(Constants.O)) {
                 playerOne.setSymbol(Constants.O);
-                aiSymbol = Constants.X;
+                pcSymbol = Constants.X;
                 return;
+
             } else {
                 playerOne.setSymbol(Constants.X);
-                aiSymbol = Constants.O;
+                pcSymbol = Constants.O;
                 return;
             }
 
         } while (true);
     }
 
-    // Player 1 Vs Player 2
+    // 2 PLAYERS
     public void startGame2Players() throws IOException {
+        playerOne.setCurrentScore(0);
+        playerOne.setCurrentScore(0);
+        lastWinner = "";
         System.out.println(Messages.ARE_YOU_READY + Constants.FOUR_IN_LINE);
         chooseSymbol2Player();
-        for (int i = 0; i < rounds; i++) {
 
+        for (int i = 0; i < rounds; i++) {
             System.out.println(Messages.ROUND + (i + 1));
             startRound2Players();
         }
+
         System.out.println();
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
         PlayerManager.addScoreToPlayerFile(playerTwo.getNickname(), playerTwo.getCurrentScore(), game);
@@ -113,6 +140,8 @@ public class FourInLine {
         System.out.println();
         System.out.println(Messages.GREAT_GAME);
         System.out.println();
+        System.out.println(Messages.PRESS_ENTER);
+        Utils.scanString.nextLine();
     }
 
     private void startRound2Players() {
@@ -121,9 +150,12 @@ public class FourInLine {
             hasPlayerWon(playerOne);
             turn(playerTwo);
             hasPlayerWon(playerTwo);
+
         } while (winner.isEmpty());
+
         stop();
-        board = new String[3][3];
+
+        board = new String[6][7];
         winner = "";
     }
 
@@ -131,13 +163,16 @@ public class FourInLine {
         System.out.println(playerOne.getNickname() + " - " + Messages.CHOOSE_SYMBOL + Constants.X + " or " + Constants.O);
         do {
             String chosen = Utils.scanString.nextLine();
+
             if (!chosen.equalsIgnoreCase(Constants.X) && !chosen.equalsIgnoreCase(Constants.O)) {
                 System.out.println(Messages.INVALID_INPUT);
                 System.out.println(Messages.TRY_AGAIN);
+
             } else if (chosen.equalsIgnoreCase(Constants.O)) {
                 playerOne.setSymbol(Constants.O);
                 playerTwo.setSymbol(Constants.X);
                 return;
+
             } else {
                 playerOne.setSymbol(Constants.X);
                 playerTwo.setSymbol(Constants.O);
@@ -147,8 +182,8 @@ public class FourInLine {
         } while (true);
     }
 
-    //Ai
-    private LinkedList<Integer> aiFindPossibleMoves() {
+    // PC
+    private LinkedList<Integer> pcFindPossibleMoves() {
 
         LinkedList<Integer> freeColumns = new LinkedList<>();
         for (int i = 0; i < board[0].length; i++) {
@@ -170,13 +205,13 @@ public class FourInLine {
         int cordNumber = coordinates;
         for (int i = board.length - 1; i >= 0; i--) {
             if (board[i][cordNumber] == null) {
-                board[i][cordNumber] = aiSymbol;
+                board[i][cordNumber] = pcSymbol;
                 return;
             }
         }
     }
 
-    //Commons
+    // COMMON
     private void turn(Player player) {
         if (!winner.isEmpty()) {
             return;
@@ -238,23 +273,25 @@ public class FourInLine {
         return !(coordinates.matches("[1-7]"));
     }
 
+    // FOR PLAYERS
     private boolean isColumnFull(String coordinate) {
         return !(board[0][Integer.parseInt(coordinate) - 1] == null);
     }
 
+    // FOR PC
     private boolean isColumnFull(int coordinate) {
         return !(board[0][coordinate] == null);
     }
 
     private void draw() {
 
-        //Column Numbers
+        // COLUMN NUMBERS
         for (int i = 1; i < board[0].length + 1; i++) {
             System.out.print(i + "   ");
         }
         System.out.println();
 
-        //Board's body
+        // BOARD'S BODY
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
 
@@ -280,11 +317,7 @@ public class FourInLine {
         System.out.println();
     }
 
-    public void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
+    // 2 PLAYERS
     private void stop() {
         draw();
         if (winner.equals(Messages.TIE)) {
@@ -298,6 +331,7 @@ public class FourInLine {
         }
     }
 
+    // PC VS PLAYER
     private void end() {
         draw();
         if (winner.equals(Messages.TIE)) {
@@ -312,13 +346,20 @@ public class FourInLine {
     }
 
     private void assignPoints(Player player) {
+        if (isFirstRound) {
+            player.setCurrentScore(points);
+            isFirstRound = false;
+            return;
+        }
+
+        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
+            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
+            player.setCurrentScore(player.getCurrentScore() + (player.getConsecutiveRoundsWon() * points * 2));
+            return;
+        }
         if (lastWinner.isEmpty() || (!lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname()))) {
             player.setConsecutiveRoundsWon(0);
             player.setCurrentScore(player.getCurrentScore() + points);
-        }
-        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
-            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
-            player.setCurrentScore(player.getCurrentScore() + player.getConsecutiveRoundsWon() * points * 2);
         }
     }
 
@@ -328,7 +369,7 @@ public class FourInLine {
         for (int row = board.length - 1; row >= 0; row--) {
             for (int col = board[row].length - 1; col >= 0; col--) {
 
-                //check for 4 up
+                // CHECK 4 UP
                 if (!hasWon && row - 3 >= 0) {
                     if (board[row][col] == player.getSymbol() &&
                             board[row - 1][col] == player.getSymbol() &&
@@ -338,7 +379,7 @@ public class FourInLine {
 
                     }
                 }
-                //check for 4 left
+                // CHECK 4 LEFT
                 if (!hasWon & col - 3 >= 0) {
                     if (board[row][col] == player.getSymbol() &&
                             board[row][col - 1] == player.getSymbol() &&
@@ -347,7 +388,7 @@ public class FourInLine {
                         hasWon = true;
                     }
                 }
-                //check for 4 right diagonal
+                // CHECK 4 RIGHT DIAGONAL
                 if (!hasWon && row - 3 >= 0 && col + 3 < board[row].length)
                     if (board[row][col] == player.getSymbol() &&
                             board[row - 1][col + 1] == player.getSymbol() &&
@@ -355,7 +396,7 @@ public class FourInLine {
                             board[row - 3][col + 3] == player.getSymbol()) {
                         hasWon = true;
                     }
-                //check for 4 left diagonal
+                // CHECK 4 LEFT DIAGONAL
                 if (!hasWon && row - 3 >= 0 && col - 3 >= 0)
                     if (board[row][col] == player.getSymbol() &&
                             board[row - 1][col - 1] == player.getSymbol() &&
@@ -378,41 +419,41 @@ public class FourInLine {
         for (int row = board.length - 1; row >= 0; row--) {
             for (int col = board[row].length - 1; col >= 0; col--) {
 
-                //check for 4 up
+                // CHECK 4 UP
                 if (!hasWon & row - 3 >= 0) {
-                    if (board[row][col] == aiSymbol &&
-                            board[row - 1][col] == aiSymbol &&
-                            board[row - 2][col] == aiSymbol &&
-                            board[row - 3][col] == aiSymbol) {
+                    if (board[row][col] == pcSymbol &&
+                            board[row - 1][col] == pcSymbol &&
+                            board[row - 2][col] == pcSymbol &&
+                            board[row - 3][col] == pcSymbol) {
                         hasWon = true;
                     }
                 }
 
-                //check for 4 left
+                // CHECK 4 LEFT
                 if (!hasWon && col - 3 >= 0)
-                    if (board[row][col] == aiSymbol &&
-                            board[row][col - 1] == aiSymbol &&
-                            board[row][col - 2] == aiSymbol &&
-                            board[row][col - 3] == aiSymbol) {
+                    if (board[row][col] == pcSymbol &&
+                            board[row][col - 1] == pcSymbol &&
+                            board[row][col - 2] == pcSymbol &&
+                            board[row][col - 3] == pcSymbol) {
                         hasWon = true;
 
                     }
 
-                //check for 4 right diagonal
+                // CHECK 4 RIGHT DIAGONAL
                 if (!hasWon && row - 3 >= 0 && col + 3 < board[row].length)
-                    if (board[row][col] == aiSymbol &&
-                            board[row - 1][col + 1] == aiSymbol &&
-                            board[row - 2][col + 2] == aiSymbol &&
-                            board[row - 3][col + 3] == aiSymbol) {
+                    if (board[row][col] == pcSymbol &&
+                            board[row - 1][col + 1] == pcSymbol &&
+                            board[row - 2][col + 2] == pcSymbol &&
+                            board[row - 3][col + 3] == pcSymbol) {
                         hasWon = true;
                     }
 
-                //check for 4 left diagonal
+                // CHECK 4 LEFT DIAGONAL
                 if (!hasWon && row - 3 >= 0 && col - 3 >= 0)
-                    if (board[row][col] == aiSymbol &&
-                            board[row - 1][col - 1] == aiSymbol &&
-                            board[row - 2][col - 2] == aiSymbol &&
-                            board[row - 3][col - 3] == aiSymbol) {
+                    if (board[row][col] == pcSymbol &&
+                            board[row - 1][col - 1] == pcSymbol &&
+                            board[row - 2][col - 2] == pcSymbol &&
+                            board[row - 3][col - 3] == pcSymbol) {
                         hasWon = true;
                     }
             }
