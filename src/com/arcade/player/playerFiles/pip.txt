@@ -12,3 +12,4 @@ Rock Paper Scissors 63
 Rock Paper Scissors 105
 Rock Paper Scissors 0
 Rock Paper Scissors 105
+Rock Paper Scissors 0

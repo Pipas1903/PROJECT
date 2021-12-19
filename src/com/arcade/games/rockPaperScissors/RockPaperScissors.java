@@ -22,10 +22,9 @@ public class RockPaperScissors {
     PrintWriter out;
     BufferedReader in;
 
-    int rounds = 10;
+    int rounds = 1;
     int points = 21;
     int pcPoints = 0;
-    Moves moves;
 
     private String winner = "";
     private String lastWinner = "";
@@ -76,7 +75,6 @@ public class RockPaperScissors {
             }
 
             Moves pcMove = Moves.getRandomMove();
-
             winner = playerMove.play(pcMove, playerOne.getNickname());
 
             if (winner.equals(Messages.PC)) {
