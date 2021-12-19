@@ -79,6 +79,10 @@ public class RockPaperScissors {
 
             winner = playerMove.play(pcMove, playerOne.getNickname());
 
+            if (winner.equals(Messages.PC)) {
+                pcPoints += points;
+            }
+
             System.out.println(playerOne.getNickname() + ": " + playerMove + " vs " + Messages.PC + ": " + pcMove);
 
             if (winner.equals(playerOne.getNickname())) {
