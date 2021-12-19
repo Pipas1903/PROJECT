@@ -26,7 +26,7 @@ public class FourInLine {
     private boolean isFirstRound = true;
 
     private int points = 21;
-    private int rounds = 2;
+    private int rounds = 1;
 
     private String[][] board = new String[6][7];
 

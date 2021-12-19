@@ -24,3 +24,4 @@ Tic Tac Toe 42
 Tic Tac Toe 63
 Four In Line 63
 Four In Line 21
+Four In Line 63

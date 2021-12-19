@@ -21,7 +21,7 @@ public class TicTacToe {
     private int pcScore;
     private boolean isFirstRound = true;
 
-    private int rounds = 2;
+    private int rounds = 1;
     private int points = 21;
 
 
