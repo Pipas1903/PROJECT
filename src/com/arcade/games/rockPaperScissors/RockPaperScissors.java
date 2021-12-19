@@ -22,6 +22,8 @@ public class RockPaperScissors {
     PrintWriter out;
     BufferedReader in;
 
+    private boolean isFirstRound = true;
+
     int rounds = 1;
     int points = 21;
     int pcPoints = 0;
@@ -228,13 +230,20 @@ public class RockPaperScissors {
     }
 
     private void assignPoints(Player player) {
+        if (isFirstRound) {
+            player.setCurrentScore(points);
+            isFirstRound = false;
+            return;
+        }
+
+        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
+            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
+            player.setCurrentScore(player.getCurrentScore() + (player.getConsecutiveRoundsWon() * points * 2));
+            return;
+        }
         if (lastWinner.isEmpty() || (!lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname()))) {
             player.setConsecutiveRoundsWon(0);
             player.setCurrentScore(player.getCurrentScore() + points);
-        }
-        if (lastWinner.equals(player.getNickname()) && winner.equals(player.getNickname())) {
-            player.setConsecutiveRoundsWon(player.getConsecutiveRoundsWon() + 1);
-            player.setCurrentScore(player.getCurrentScore() + player.getConsecutiveRoundsWon() * points * 2);
         }
     }
 
