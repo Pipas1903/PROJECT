@@ -149,7 +149,8 @@ public class Menu {
             System.out.println(Messages.PLAY_TIC_TAC_TOE);
             System.out.println(Messages.PLAY_ROCK_PAPER_SCISSORS);
             System.out.println(Messages.PLAY_FOUR_IN_LINE);
-            System.out.println("4. " + Messages.BACK_OPTION);
+            System.out.println(Messages.SEE_POINT_RULES);
+            System.out.println("5. " + Messages.BACK_OPTION);
             System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
             System.out.println();
             System.out.println(Messages.INSERT_NUMBER);
@@ -174,6 +175,13 @@ public class Menu {
                     break;
 
                 case "4":
+                    System.out.println();
+                    System.out.println(Messages.POINT_ATTRIBUTION);
+                    System.out.println(Messages.POINT_ATTRIBUTION_RULES);
+                    Utils.scanString.nextLine();
+                    chooseGame();
+                    break;
+                case "5":
                     System.out.println();
                     this.playerOne = new Player();
                     this.playerTwo = new Player();
@@ -200,11 +208,10 @@ public class Menu {
         while (true) {
             System.out.println(Messages.TO_DO);
             System.out.println(Messages.SEE_GAME_RULES);
-            System.out.println(Messages.SEE_POINT_RULES);
             System.out.println(Messages.PLAY);
-            System.out.println("4. " + Messages.SEE_PLAYER_LEADERBOARD);
-            System.out.println("5. " + Messages.SEE_GAME_LEADERBOARD);
-            System.out.println("6. " + Messages.BACK_OPTION);
+            System.out.println("3. " + Messages.SEE_PLAYER_LEADERBOARD);
+            System.out.println("4. " + Messages.SEE_GAME_LEADERBOARD);
+            System.out.println("5. " + Messages.BACK_OPTION);
             System.out.println(Constants.ANSI_RED + Messages.EXIT_OPTION + Constants.ANSI_RESET);
             System.out.println();
             System.out.println(Messages.INSERT_NUMBER);
@@ -222,18 +229,10 @@ public class Menu {
 
                 case "2":
                     System.out.println();
-                    System.out.println(Messages.POINT_ATTRIBUTION);
-                    System.out.println(Messages.POINT_ATTRIBUTION_RULES);
-                    Utils.scanString.nextLine();
-                    gameOptions(game);
-                    break;
-
-                case "3":
-                    System.out.println();
                     play(game);
                     break;
 
-                case "4":
+                case "3":
                     System.out.println();
                     if (playerTwo != null) {
                         System.out.println(playerOne.getNickname());
@@ -249,21 +248,24 @@ public class Menu {
                     Utils.scanString.nextLine();
                     break;
 
-                case "5":
+                case "4":
                     System.out.println();
                     System.out.println(Constants.ANSI_PURPLE + Messages.TOP_SCORES + Constants.ANSI_RESET);
                     LeaderboardManager.printScores(game);
                     Utils.scanString.nextLine();
                     break;
-                case "6":
+
+                case "5":
                     System.out.println();
                     chooseGame();
                     break;
+
                 case "0":
                     System.out.println();
                     System.out.println(Messages.BYE);
                     System.exit(1);
                     return;
+
                 default:
                     System.out.println();
                     System.out.println(Messages.INVALID_INPUT);

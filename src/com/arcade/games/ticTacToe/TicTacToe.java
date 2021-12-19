@@ -292,7 +292,6 @@ public class TicTacToe {
 
     private void startRound1Player() {
         do {
-            clearScreen();
             turn(playerOne);
             hasPlayerWon(playerOne);
             pcPlacePieceInBoard(pcChooseTile(aiFindPossibleMoves()));
@@ -338,11 +337,6 @@ public class TicTacToe {
             winner = Messages.PC;
         }
         lastWinner = Messages.PC;
-    }
-
-    public void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
     private void end() {
