@@ -53,6 +53,8 @@ public class TicTacToe {
 
 
     public void startGame2Players() throws IOException {
+        playerOne.setCurrentScore(0);
+        playerTwo.setCurrentScore(0);
         System.out.println(Messages.ARE_YOU_READY + Constants.TIC_TAC_TOE);
         chooseSymbol2Player();
         for (int i = 0; i < rounds; i++) {

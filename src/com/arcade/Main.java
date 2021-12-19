@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
        // new Menu().on();
-        RockPaperScissors game = new RockPaperScissors(new Player("me"), new Player("terminal me"));
+        RockPaperScissors game = new RockPaperScissors(new Player("intell"), new Player("terminal"));
         game.startGame2Players();
     }
 

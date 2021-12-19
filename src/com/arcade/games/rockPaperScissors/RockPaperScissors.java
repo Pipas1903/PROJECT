@@ -1,22 +1,21 @@
 package com.arcade.games.rockPaperScissors;
 
 import com.arcade.common.Constants;
+import com.arcade.common.GamesInfo;
 import com.arcade.common.Messages;
 import com.arcade.common.Utils;
 import com.arcade.player.Player;
+import com.arcade.leaderboard.*;
+import com.arcade.player.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class RockPaperScissors {
+    private final GamesInfo game = GamesInfo.ROCK_PAPER_SCISSORS;
     private Player playerOne;
     private Player playerTwo;
-
-    private String playerMove;
 
     private Socket clientSocket;
 
@@ -26,7 +25,7 @@ public class RockPaperScissors {
     int rounds = 10;
     int points = 21;
     Moves moves;
-    String winner;
+    private String winner;
 
     public RockPaperScissors(Player player) {
         this.playerOne = player;
@@ -43,22 +42,60 @@ public class RockPaperScissors {
     }
 
     public void startGame2Players() throws IOException {
-        System.out.println(Messages.WELCOME_TO_ROCK_PAPER_SCISSORS);
+        playerOne.setCurrentScore(0);
+        playerTwo.setCurrentScore(0);
+        System.out.println(Constants.ANSI_YELLOW + Messages.WELCOME_TO_ROCK_PAPER_SCISSORS + Constants.ANSI_RESET);
         System.out.println();
         System.out.println(Constants.ANSI_RED + Messages.REMEMBER + Constants.ANSI_RESET);
-        System.out.println();
+
         System.out.println(Messages.PRESS_ENTER);
         Utils.scanString.nextLine();
-        int counter = 1;
+
         connect();
-        while (counter < rounds) {
+        for (int i = 1; i <= rounds; i++) {
+            System.out.println(Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_BLACK + Messages.ROUND + i + Constants.ANSI_RESET);
+            System.out.println();
+            out.println(Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_BLACK + Messages.ROUND + i + Constants.ANSI_RESET);
+            out.println(Messages.WAITING_FOR_PLAYER_1 + "\n");
+
             System.out.println(playerOne.getNickname() + Messages.ENTER_YOUR_MOVE);
             String player1Move = getPlayer1Move();
+            System.out.println();
             System.out.println(Messages.WAITING_FOR_PLAYER_2);
+
             String player2Move = receiveMoves();
+            System.out.println();
+            System.out.println(playerOne.getNickname() + ": " + player1Move + " vs " + playerTwo.getNickname() + ": " + player2Move);
+            System.out.println();
             rules(player1Move, player2Move);
-            comunicate();
+            System.out.println();
+            comunicate(player1Move, player2Move);
+
         }
+        System.out.println();
+
+        PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
+        PlayerManager.addScoreToPlayerFile(playerTwo.getNickname(), playerTwo.getCurrentScore(), game);
+        LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
+        LeaderboardManager.manageScores(game, playerTwo.getNickname(), playerTwo.getCurrentScore());
+
+        printEndGameStats();
+    }
+
+    private void printEndGameStats() {
+        System.out.println(Messages.PRESS_ENTER);
+        Utils.scanString.nextLine();
+        System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println(Constants.ANSI_BLUE + playerTwo.getNickname() + " -> " + playerTwo.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println();
+        System.out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > playerTwo.getCurrentScore() ? playerOne.getNickname() : playerTwo.getNickname()));
+        System.out.println();
+        out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
+        out.println(Constants.ANSI_BLUE + playerTwo.getNickname() + " -> " + playerTwo.getCurrentScore() + Constants.ANSI_RESET);
+        out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > playerTwo.getCurrentScore() ? playerOne.getNickname() : playerTwo.getNickname()));
+        out.println(Messages.GREAT_GAME);
+        System.out.println(Messages.GREAT_GAME);
+        System.out.println();
     }
 
     private String getPlayer1Move() {
@@ -72,51 +109,54 @@ public class RockPaperScissors {
         return player1Move;
     }
 
-    public void rules(String playerChose, String player2Chose) {
+    private void rules(String playerChose, String player2Chose) {
         if (player2Chose.equals(playerChose)) {
             System.out.println("it's a tie");
             winner = "tie";
             return;
         }
 
-        if (player2Chose.equals("ROCK") && playerChose.equals("PAPER") || player2Chose.equals("PAPER") && playerChose.equals("SCISSORS") || player2Chose.equals("SCISSORS") && playerChose.equals("ROCK")) {
-            System.out.println(playerOne.getNickname() + " won this round!");
-            winner = playerTwo.getNickname();
+        if ((player2Chose.equalsIgnoreCase("ROCK") && playerChose.equalsIgnoreCase("PAPER")) || player2Chose.equalsIgnoreCase("PAPER") && playerChose.equalsIgnoreCase("SCISSORS") || player2Chose.equalsIgnoreCase("SCISSORS") && playerChose.equalsIgnoreCase("ROCK")) {
+            System.out.println(Messages.ANNOUNCE_WINNER + playerOne.getNickname());
+            winner = playerOne.getNickname();
             playerOne.setCurrentScore(playerOne.getCurrentScore() + points);
             return;
         }
-        System.out.println("Player 1 won this round!");
-        winner = playerOne.getNickname();
+
+        System.out.println(Messages.ANNOUNCE_WINNER + playerTwo.getNickname());
+        winner = playerTwo.getNickname();
         playerTwo.setCurrentScore(playerTwo.getCurrentScore() + points);
     }
 
-    public void connect() throws IOException {
+    private void connect() throws IOException {
 
         ServerSocket serverSocket = new ServerSocket(92);
         System.out.println(Messages.WAITING);
         clientSocket = serverSocket.accept();
         System.out.println(Messages.CONNECTED);
+        System.out.println();
         out = new PrintWriter(clientSocket.getOutputStream(), true);
-        out.println(Messages.WELCOME_TO_ROCK_PAPER_SCISSORS + "\n");
-        out.println(Messages.WAITING_FOR_PLAYER_1 + "\n");
+        out.println(Constants.ANSI_YELLOW + Messages.WELCOME_TO_ROCK_PAPER_SCISSORS + Constants.ANSI_RESET + "\n");
     }
 
-    public String receiveMoves() throws IOException {
+    private String receiveMoves() throws IOException {
         out.println(Messages.ENTER_YOUR_MOVE);
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-        playerMove = in.readLine();
-        while (isInputInvalid(playerMove)) {
+        String player2Move = in.readLine();
+        while (isInputInvalid(player2Move)) {
             out.println(Messages.INVALID_INPUT);
             out.println(Messages.TRY_AGAIN + "\n");
-            playerMove = in.readLine();
+            player2Move = in.readLine();
         }
-        return playerMove;
+        return player2Move;
     }
 
-    public void comunicate() {
-        out.println("The winner of this rounds is ....");
-        out.print(winner);
+    private void comunicate(String player1move, String player2Move) {
+        out.println("\n");
+        out.println(playerOne.getNickname() + ": " + player1move + " vs " + playerTwo.getNickname() + ": " + player2Move);
+        out.println("The winner of this rounds is: " + winner);
+        out.println("\n");
     }
 
 
@@ -124,9 +164,5 @@ public class RockPaperScissors {
         return !playerMove.equalsIgnoreCase(String.valueOf(Moves.PAPER)) && !playerMove.equalsIgnoreCase(String.valueOf(Moves.ROCK)) && !playerMove.equalsIgnoreCase(String.valueOf(Moves.SCISSORS));
     }
 
-
-    public String getPlayerMove() {
-        return playerMove;
-    }
 }
 
