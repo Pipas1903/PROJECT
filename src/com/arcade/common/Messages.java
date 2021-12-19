@@ -96,7 +96,6 @@ public class Messages {
     public static final String SEE_POINT_RULES = "4. See point attribution system.";
     public static final String PLAY = "2. Play";
     public static final String SEE_GAME_LEADERBOARD = "See game leaderboard.";
-    public static final String OPTION_5_4MENU = "5. ";
 
 
 }
