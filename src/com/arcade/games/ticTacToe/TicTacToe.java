@@ -18,6 +18,7 @@ public class TicTacToe {
     private Player playerTwo;
     private String lastWinner = "";
     private String aiSymbol;
+    private int pcScore;
 
     private int rounds = 1;
     private int points = 21;
@@ -68,6 +69,8 @@ public class TicTacToe {
         Utils.scanString.nextLine();
         System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
         System.out.println(Constants.ANSI_BLUE + playerTwo.getNickname() + " -> " + playerTwo.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println();
+        System.out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > playerTwo.getCurrentScore() ? playerOne.getNickname() : playerTwo.getNickname()));
         System.out.println();
         System.out.println(Messages.GREAT_GAME);
         System.out.println();
@@ -314,6 +317,9 @@ public class TicTacToe {
         System.out.println(Messages.PRESS_ENTER);
         Utils.scanString.nextLine();
         System.out.println(Constants.ANSI_PURPLE + playerOne.getNickname() + " -> " + playerOne.getCurrentScore() + Constants.ANSI_RESET);
+        System.out.println(Constants.ANSI_PURPLE + Messages.PC + " -> " + pcScore + Constants.ANSI_RESET);
+        System.out.println();
+        System.out.println(Messages.ANNOUNCE_WINNER + (playerOne.getCurrentScore() > pcScore ? playerOne.getNickname() : Messages.PC));
         System.out.println();
         System.out.println(Messages.GREAT_GAME);
         System.out.println();
@@ -348,6 +354,7 @@ public class TicTacToe {
             assignPoints(playerOne);
         } else {
             System.out.println(Messages.ANNOUNCE_WINNER + Messages.PC);
+            pcScore += points;
         }
     }
 

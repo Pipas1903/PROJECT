@@ -37,12 +37,12 @@ public class Messages {
     public static final String NICKNAME = "Nickname: ";
 
     // ALL GAMES
-    public static final String ARE_YOU_READY = Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_WHITE + "Are you ready?\nLet's play: " + Constants.ANSI_RESET;
-    public static final String GREAT_GAME = Constants.ANSI_GREEN_BACKGROUND + "Great game! Until next time!\n" + Constants.ANSI_RESET;
+    public static final String ARE_YOU_READY = Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_BLACK + "Are you ready?" + Constants.ANSI_RESET + "\n" + Constants.ANSI_BLUE_BACKGROUND + Constants.ANSI_BLACK + "Let's play: " + Constants.ANSI_RESET;
+    public static final String GREAT_GAME = Constants.ANSI_GREEN_BACKGROUND + Constants.ANSI_BLACK + "Great game! Until next time!" + Constants.ANSI_RESET;
     public static final String ROUND = "ROUND ";
 
     // TIC TAC TOE MESSAGES
-    public static final String CHOOSE_SYMBOL = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "which symbol would you like to use? " + Constants.ANSI_RESET;
+    public static final String CHOOSE_SYMBOL = "which symbol would you like to use? ";
     public static final String CHOOSE_COORDINATES = Constants.ANSI_WHITE_BACKGROUND + Constants.ANSI_BLACK + "please enter the coordinates where you want to place your piece: " + Constants.ANSI_RESET;
     public static final String OCCUPIED_TILE = Constants.ANSI_RED + "That tile is already occupied! Try another one!" + Constants.ANSI_RESET;
     public static final String ILLEGAL_MOVE = Constants.ANSI_RED + "That move is ilegal!" + Constants.ANSI_RESET;
