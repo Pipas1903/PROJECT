@@ -55,7 +55,7 @@ public class FourInLine {
         System.out.println();
 
         PlayerManager.addScoreToPlayerFile(playerOne.getNickname(), playerOne.getCurrentScore(), game);
-        LeaderboardManager.manageScores(game, playerOne.getNickname(), playerOne.getCurrentScore());
+        LeaderboardManager.manageScores(game,playerOne.getNickname(),playerOne.getCurrentScore());
 
         System.out.println(Messages.PRESS_ENTER);
         Utils.scanString.nextLine();
@@ -275,6 +275,9 @@ public class FourInLine {
 
     // FOR PLAYERS
     private boolean isColumnFull(String coordinate) {
+        if(isMoveIllegal(coordinate)){
+            return true;
+        }
         return !(board[0][Integer.parseInt(coordinate) - 1] == null);
     }
 
